@@ -1,6 +1,6 @@
 package skat.memory;
 
-public class PlayedCards implements IPlayedCards{
+public class PlayedCards implements IPlayedCards {
 
     private Card[] playedCards;
 
@@ -35,8 +35,8 @@ public class PlayedCards implements IPlayedCards{
     @Override
     public Card[] removePlayedCards() {
         Card[] cards = playedCards;
-        for(Card card:playedCards) {
-            card = null;
+        for(byte i = 0; i < playedCards.length; i++) {
+            playedCards[i] = null;
         }
         return cards;
     }
