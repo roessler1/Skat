@@ -9,4 +9,6 @@ public interface IOpenCards {
     void removeCard(String cardUrl);
 
     void emptyOpenCards();
+
+    int getSize();
 }

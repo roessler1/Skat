@@ -25,4 +25,9 @@ public class OpenCards implements IOpenCards {
     public void emptyOpenCards() {
         openCards.clear();
     }
+
+    @Override
+    public int getSize() {
+        return openCards.size();
+    }
 }
