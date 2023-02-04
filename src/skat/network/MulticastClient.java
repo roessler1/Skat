@@ -3,13 +3,12 @@ package skat.network;
 import java.io.IOException;
 import java.net.*;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class MulticastClient implements IMulticastClient, Runnable {
 
     protected MulticastSocket socket;
     protected byte[] buffer;
-    Queue<String> serverAddresses;
+    LinkedList<String> serverAddresses;
 
     public MulticastClient() {
         try {
@@ -41,9 +40,11 @@ public class MulticastClient implements IMulticastClient, Runnable {
     }
 
     @Override
-    public Queue<String> getAvailableServers() {
+    public LinkedList<String> getAvailableServers() {
         synchronized(serverAddresses) {
-            return serverAddresses;
+            LinkedList<String> addresses = new LinkedList<>(serverAddresses);
+            serverAddresses.clear();
+            return addresses;
         }
     }
 
