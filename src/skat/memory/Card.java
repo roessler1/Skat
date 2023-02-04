@@ -1,6 +1,8 @@
 package skat.memory;
 
-public enum Card {
+import java.io.Serializable;
+
+public enum Card implements Serializable {
     C_ACE((byte) 0, (byte) 12, (byte) 11, "resources/assets/texture/c_ace.png"),
     C_KING((byte) 1, (byte) 12, (byte) 4, "resources/assets/texture/c_king.png"),
     C_QUEEN((byte) 2, (byte) 12, (byte) 3, "resources/assets/texture/c_queen.png"),
