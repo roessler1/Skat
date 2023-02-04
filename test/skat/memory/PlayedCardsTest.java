@@ -43,10 +43,7 @@ public class PlayedCardsTest {
     @Test
     @Order(4)
     void removePlayedCardsTest() {
-        Card[] testCards = playedCards.removePlayedCards();
+        playedCards.removePlayedCards();
         Assertions.assertNull(playedCards.getFirstPlayedCard());
-        for(byte i = 0; i < cards.length; i++) {
-            Assertions.assertEquals(cards[i], testCards[i]);
-        }
     }
 }

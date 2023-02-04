@@ -9,6 +9,11 @@ public class PlayedCards implements IPlayedCards {
     }
 
     @Override
+    public Card[] getPlayedCards() {
+        return playedCards;
+    }
+
+    @Override
     public void setPlayedCards(Card[] playedCards) {
         this.playedCards = playedCards;
     }
@@ -33,12 +38,15 @@ public class PlayedCards implements IPlayedCards {
     }
 
     @Override
-    public Card[] removePlayedCards() {
-        Card[] cards = playedCards;
+    public boolean isEmpty() {
+        return playedCards[0] == null;
+    }
+
+    @Override
+    public void removePlayedCards() {
         for(byte i = 0; i < playedCards.length; i++) {
             playedCards[i] = null;
         }
-        return cards;
     }
 
     @Override

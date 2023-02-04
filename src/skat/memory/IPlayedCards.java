@@ -2,6 +2,8 @@ package skat.memory;
 
 public interface IPlayedCards {
 
+    Card[] getPlayedCards();
+
     void setPlayedCards(Card[] playedCards);
 
     Card getFirstPlayedCard();
@@ -10,7 +12,9 @@ public interface IPlayedCards {
 
     boolean isComplete();
 
-    Card[] removePlayedCards();
+    boolean isEmpty();
+
+    void removePlayedCards();
 
     String[] getPlayedCardsUrl();
 }

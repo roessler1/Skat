@@ -7,8 +7,8 @@ import java.util.Arrays;
 
 public class Hand implements IHand {
 
-    private ArrayList<Card> hand;
     private final CardSort cardSort;
+    private ArrayList<Card> hand;
 
     public Hand() {
         hand = new ArrayList<>();
@@ -19,6 +19,24 @@ public class Hand implements IHand {
     public void addCards(Card[] cards) {
         hand.addAll(Arrays.asList(cards));
         sortHand();
+    }
+
+    @Override
+    public boolean hasTrumpCard(byte trumpId) {
+        for(Card card : hand) {
+            if(card.getValue() == 2 || card.getColor() == trumpId)
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasCard(byte colorId) {
+        for(Card card : hand) {
+            if(card.getColor() == colorId)
+                return true;
+        }
+        return false;
     }
 
     @Override
@@ -37,12 +55,11 @@ public class Hand implements IHand {
     }
 
     @Override
-    public Card removeCard(String cardUrl) {
+    public void removeCard(String cardUrl) {
         Card card = getCard(cardUrl);
         if(card != null) {
             hand.remove(card);
         }
-        return card;
     }
 
     @Override
