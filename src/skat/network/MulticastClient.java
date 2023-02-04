@@ -34,6 +34,7 @@ public class MulticastClient implements IMulticastClient, Runnable {
                     serverAddresses.add(new String(packet.getData(), 0, packet.getLength()));
                 }
             }
+            socket.leaveGroup(isa, nif);
         } catch(IOException e) {
             e.printStackTrace();
         }
