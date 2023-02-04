@@ -4,11 +4,15 @@ public interface IHand {
 
     void addCards(Card[] cards);
 
+    boolean hasTrumpCard(byte trumpId);
+
+    boolean hasCard(byte colorId);
+
     String[] getGraphicsUrl();
 
     void emptyHand();
 
-    Card removeCard(String cardUrl);
+    void removeCard(String cardUrl);
 
     Card getCard(String cardUrl);
 
