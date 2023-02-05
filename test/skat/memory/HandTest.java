@@ -41,9 +41,9 @@ public class HandTest {
     @Test
     @Order(3)
     void removeCardTest() {
-        Card card = hand.removeCard(cards[2].getUrl());
-        Assertions.assertEquals(cards[2], card);
-        Assertions.assertNull(hand.getCard(card.getUrl()));
+        hand.removeCard(cards[2].getUrl());
+        Assertions.assertNull(hand.getCard(cards[2].getUrl()));
+        Assertions.assertNotNull(hand.getCard(cards[0].getUrl()));
     }
 
     @Test
