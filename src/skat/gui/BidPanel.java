@@ -40,8 +40,10 @@ public class BidPanel extends JPanel {
     }
 
     private void activateBidButtons() {
+        // TODO -> Buttons aktivieren
     }
 
     private void activateSkatButtons() {
+        // TODO -> Buttons aktivieren
     }
 }
