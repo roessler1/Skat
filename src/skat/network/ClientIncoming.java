@@ -87,7 +87,8 @@ public class ClientIncoming {
     private void updateGame() {
         try {
             byte game = in.readByte();
-            //TODO -> set game and announce it
+            cardLogic.setGameId(game);
+            //TODO -> announce game
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
