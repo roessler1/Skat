@@ -33,14 +33,14 @@ public class ClientIncoming {
     }
 
     private void update() {
-        while(isUp) {
+        do {
             try {
                 byte input = in.readByte();
                 resolveUpdate(input);
             } catch(IOException e) {
                 Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
             }
-        }
+        } while(isUp);
     }
 
     private void resolveUpdate(byte updateId) {
@@ -49,6 +49,83 @@ public class ClientIncoming {
             case 2 -> updatePlayedCards();
             case 3 -> updateSkat();
             case 4 -> updateOpenGameCards();
+            case 5 -> updatePlayerPoints();
+            case 6 -> updateId();
+            case 7 -> updateBid();
+            case 8 -> updateTurn();
+            case 9 -> updateGame();
+            case 10 -> updateGameAddition();
+            case 11 -> updateSinglePlayerId();
+            case 12 -> closeInput();
+        }
+    }
+
+    private void updateSinglePlayerId() {
+        try {
+            byte singlePlayer = in.readByte();
+            //TODO -> displaying single player
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    private void updateGameAddition() {
+        try {
+            String msg = switch(in.readByte()) {
+                case 2 -> "Hand";
+                case 3 -> "Schneider";
+                case 4 -> "Schwarz";
+                case 5 -> "Ouvert";
+                default -> "";
+            };
+            //TODO -> display game addition together with the game announcement
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    private void updateGame() {
+        try {
+            byte game = in.readByte();
+            //TODO -> set game and announce it
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    private void updateTurn() {
+        try {
+            boolean turn = in.readBoolean();
+            //TODO -> set turn
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    private void updateBid() {
+        try {
+            short bid = in.readShort();
+            //TODO -> create bid panel
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    private void updateId() {
+        try {
+            byte id = in.readByte();
+            //TODO -> set own id
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    private void updatePlayerPoints() {
+        try {
+            byte[] points = (byte[]) in.readObject();
+            //TODO -> open result panel
+        } catch(IOException | ClassNotFoundException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
@@ -90,8 +167,11 @@ public class ClientIncoming {
 
     public void closeInput() {
         try {
-            in.close();
             isUp = false;
+            in.close();
+            cardLogic = null;
+            CardLogic.deleteCardLogic();
+            //TODO -> close network output and socket, change to main menu
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

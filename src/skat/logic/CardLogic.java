@@ -7,11 +7,13 @@ public class CardLogic {
     static CardLogic cardLogic;
     private IHand hand;
     private IPlayedCards playedCards;
+    private byte gameId;
 
     private CardLogic() {
         cardLogic = this;
         hand = new Hand();
         playedCards = new PlayedCards();
+        gameId = 0;
     }
 
     public static CardLogic getCardLogic() {
@@ -38,5 +40,10 @@ public class CardLogic {
     public void setSkat(Card[] skat) {
         hand.addCards(skat);
         //TODO -> update Graphic
+    }
+
+    public void setGameId(byte gameId) {
+        this.gameId = gameId;
+        hand.sortCards(gameId);
     }
 }
