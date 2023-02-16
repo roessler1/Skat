@@ -22,6 +22,11 @@ public class Hand implements IHand {
     }
 
     @Override
+    public ArrayList<Card> getCards() {
+        return hand;
+    }
+
+    @Override
     public void sortCards(byte gameId) {
         sort.sort(hand, gameId);
     }

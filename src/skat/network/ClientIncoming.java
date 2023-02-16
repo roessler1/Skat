@@ -1,5 +1,6 @@
 package skat.network;
 
+import skat.gui.GraphicController;
 import skat.log.Log;
 import skat.logic.CardLogic;
 import skat.memory.Card;
@@ -142,7 +143,7 @@ public class ClientIncoming {
     private void updateSkat() {
         try {
             cardLogic.setSkat((Card[]) in.readObject());
-            //TODO -> create skat panel
+            GraphicController.getInstance().loadSkatPanel();
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -172,7 +173,8 @@ public class ClientIncoming {
             in.close();
             cardLogic = null;
             CardLogic.deleteCardLogic();
-            //TODO -> close network output and socket, change to main menu
+            //TODO -> close network output and socket
+            GraphicController.getInstance().loadMainMenu();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

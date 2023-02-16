@@ -2,17 +2,21 @@ package skat.gui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 public class CardPanel extends JPanel {
-    public CardPanel(int screenWidth, int screenHeight, String[] images) {
-        int width = (((190 * 100) / 1920) * screenWidth) / 100;
-        int height = ((((294 * 100) / 1080) * screenHeight) / 100) / 2;
 
-        FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, (0-(width /2)), 0);
+    private int width;
+    private int height;
+
+    public CardPanel(int screenWidth, int screenHeight) {
+        width = (((190 * 100) / 1920) * screenWidth) / 100;
+        height = ((((294 * 100) / 1080) * screenHeight) / 100) / 2;
+
+        FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, (0 - (width / 2)), 0);
         this.setLayout(flowLayout);
+    }
+
+    public void addCards(String[] images) {
         for(String image : images) {
             this.add(new CardLabel(image, width, height));
         }
