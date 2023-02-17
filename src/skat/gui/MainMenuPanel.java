@@ -1,5 +1,7 @@
 package skat.gui;
 
+import skat.logic.LocalEvents;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -17,11 +19,11 @@ public class MainMenuPanel extends JPanel {
         gridBagConstraints.fill = GridBagConstraints.VERTICAL;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.insets = new Insets(25, 0, 0, 0);
-        for (byte i = 0; i < buttons.length; i++) {
+        for(byte i = 0; i < buttons.length; i++) {
             gridBagConstraints.gridy = i;
             buttons[i].setPreferredSize(new Dimension(100, 40));
             buttons[i].setCursor(new Cursor(Cursor.HAND_CURSOR));
-            buttons[i].setFont(buttons[i].getFont().deriveFont(1, 14.0f));
+            buttons[i].setFont(buttons[i].getFont().deriveFont(Font.BOLD, 14.0f));
             buttons[i].setForeground(Color.black);
             buttons[i].setBackground(Color.white);
             buttons[i].setBorder(BorderFactory.createCompoundBorder());
@@ -32,6 +34,8 @@ public class MainMenuPanel extends JPanel {
     }
 
     private void activateButtons() {
-        // TODO -> Buttons aktivieren
+        buttons[0].addActionListener(e -> LocalEvents.getInstance().joinGame());
+        buttons[1].addActionListener(e -> LocalEvents.getInstance().hostGame());
+        buttons[2].addActionListener(e -> LocalEvents.getInstance().exit());
     }
 }
