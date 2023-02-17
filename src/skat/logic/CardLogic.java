@@ -1,6 +1,5 @@
 package skat.logic;
 
-import skat.gui.GraphicController;
 import skat.memory.*;
 
 import java.util.ArrayList;
@@ -19,14 +18,14 @@ public class CardLogic {
         gameId = 0;
     }
 
-    public static CardLogic getCardLogic() {
+    public static CardLogic getInstance() {
         if(cardLogic == null) {
             new CardLogic();
         }
         return cardLogic;
     }
 
-    public static void deleteCardLogic() {
+    public static void deleteInstance() {
         cardLogic = null;
     }
 
@@ -37,20 +36,12 @@ public class CardLogic {
 
     public void setPlayedCards(Card[] playedCards) {
         this.playedCards.setPlayedCards(playedCards);
-        String[] cardUrls = new String[playedCards.length];
-        for(byte i = 0; i < playedCards.length; i++) {
-            cardUrls[i] = playedCards[i].getUrl();
-        }
-        GraphicController.getInstance().addPlayedCardsGraphic(cardUrls);
+        //TODO -> update Graphic
     }
 
     private void addHandGraphic() {
         ArrayList<Card> handCards = hand.getCards();
-        String[] cardUrls = new String[handCards.size()];
-        for(byte i = 0; i < handCards.size(); i++) {
-            cardUrls[i] = handCards.get(i).getUrl();
-        }
-        GraphicController.getInstance().addHandGraphic(cardUrls);
+        //TODO -> update Graphic
     }
 
     public void setSkat(Card[] skat) {

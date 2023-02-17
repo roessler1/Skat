@@ -1,8 +1,8 @@
 package skat.network;
 
-import skat.gui.GraphicController;
 import skat.log.Log;
 import skat.logic.CardLogic;
+import skat.logic.LocalEvents;
 import skat.memory.Card;
 
 import java.io.BufferedInputStream;
@@ -26,9 +26,11 @@ public class ClientIncoming {
             this.in = new ObjectInputStream(new BufferedInputStream(in));
         } catch(IOException e) {
             Log.getLogger().severe(e.getMessage());
+            LocalEvents.getInstance().setErrorOccurred();
+            return;
         }
         isUp = true;
-        cardLogic = CardLogic.getCardLogic();
+        cardLogic = CardLogic.getInstance();
         executor = Executors.newSingleThreadScheduledExecutor();
         executor.execute(update);
     }
@@ -143,7 +145,7 @@ public class ClientIncoming {
     private void updateSkat() {
         try {
             cardLogic.setSkat((Card[]) in.readObject());
-            GraphicController.getInstance().loadSkatPanel();
+            //TODO -> create skat panel
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -172,11 +174,15 @@ public class ClientIncoming {
             isUp = false;
             in.close();
             cardLogic = null;
-            CardLogic.deleteCardLogic();
-            //TODO -> close network output and socket
-            GraphicController.getInstance().loadMainMenu();
+            CardLogic.deleteInstance();
+            LocalEvents.getInstance().closeConnection();
+            //TODO -> create main menu panel
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
+    }
+
+    public boolean isUp() {
+        return isUp;
     }
 }
