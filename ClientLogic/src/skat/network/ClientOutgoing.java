@@ -23,6 +23,17 @@ public class ClientOutgoing {
         }
     }
 
+    public void sendSkat(Card[] skat) {
+        try {
+            out.writeByte(2);
+            out.flush();
+            out.writeObject(skat);
+            out.flush();
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
     public void playCard(Card card) {
         try {
             out.writeByte(1);

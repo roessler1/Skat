@@ -31,6 +31,16 @@ public class LogicEvents {
         return logicEvents;
     }
 
+    public void insertSkat() {
+        cardLogic.insertSkat();
+    }
+
+    public void sendSkat() {
+        if(cardLogic.getHandSize() == 10) {
+            outgoing.sendSkat(cardLogic.getSkat());
+        }
+    }
+
     public void playCard(String cardUrl) {
         if(cardLogic.getHandSize() > 10) {
             cardLogic.putToSkat(cardUrl);

@@ -19,6 +19,17 @@ public class CardLogic {
         gameId = 0;
     }
 
+    public void insertSkat() {
+        addCardsToHand(skat);
+        for(byte i = 0; i < skat.length; i++)
+            skat[i] = null;
+        //TODO -> update skat panel
+    }
+
+    public Card[] getSkat() {
+        return skat;
+    }
+
     public void putToSkat(String cardUrl) {
         if(skat[0] == null) {
             skat[0] = hand.removeByUrl(cardUrl);
