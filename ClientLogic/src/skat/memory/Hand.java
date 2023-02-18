@@ -38,6 +38,15 @@ public class Hand implements IHand {
     }
 
     @Override
+    public String[] getCardsUrls() {
+        String[] cardsUrls = new String[hand.size()];
+        for(byte i = 0; i < hand.size(); i++) {
+            cardsUrls[i] = hand.get(i).getUrl();
+        }
+        return cardsUrls;
+    }
+
+    @Override
     public int getSize() {
         return hand.size();
     }

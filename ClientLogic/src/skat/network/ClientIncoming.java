@@ -57,7 +57,7 @@ public class ClientIncoming {
             case 7 -> updateBid();
             case 8 -> LogicEvents.getInstance().setTurn();
             case 9 -> updateGame();
-            case 10 -> updateGameAddition();
+            case 10 -> updatePriceStage();
             case 11 -> updateSinglePlayerId();
             case 12 -> closeInput();
             case 13 -> retryPlayCard();
@@ -83,7 +83,7 @@ public class ClientIncoming {
         }
     }
 
-    private void updateGameAddition() {
+    private void updatePriceStage() {
         try {
             String msg = switch(in.readByte()) {
                 case 2 -> "Hand";

@@ -23,6 +23,50 @@ public class ClientOutgoing {
         }
     }
 
+    public void sendOpenGameCards(String[] openCards) {
+        try {
+            out.writeByte(6);
+            out.flush();
+            out.writeObject(openCards);
+            out.flush();
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void sendBidAnswer(boolean answer) {
+        try {
+            out.writeByte(5);
+            out.flush();
+            out.writeBoolean(answer);
+            out.flush();
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void sendPriceStage(byte priceStage) {
+        try {
+            out.writeByte(4);
+            out.flush();
+            out.writeByte(priceStage);
+            out.flush();
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void sendGameId(byte gameId) {
+        try {
+            out.writeByte(3);
+            out.flush();
+            out.writeByte(gameId);
+            out.flush();
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
     public void sendSkat(Card[] skat) {
         try {
             out.writeByte(2);

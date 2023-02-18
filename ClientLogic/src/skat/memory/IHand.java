@@ -12,6 +12,8 @@ public interface IHand {
 
     ArrayList<Card> getCards();
 
+    String[] getCardsUrls();
+
     int getSize();
 
     Card removeByUrl(String cardUrl);

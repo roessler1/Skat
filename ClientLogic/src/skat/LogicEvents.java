@@ -31,6 +31,22 @@ public class LogicEvents {
         return logicEvents;
     }
 
+    public void sendOpenGameCards() {
+        outgoing.sendOpenGameCards(cardLogic.getOpenGameCards());
+    }
+
+    public void sendBidAnswer(boolean answer) {
+        outgoing.sendBidAnswer(answer);
+    }
+
+    public void sendPriceStage(byte priceStage) {
+        outgoing.sendPriceStage(priceStage);
+    }
+
+    public void sendGameId(byte gameId) {
+        outgoing.sendGameId(gameId);
+    }
+
     public void insertSkat() {
         cardLogic.insertSkat();
     }

@@ -19,6 +19,10 @@ public class CardLogic {
         gameId = 0;
     }
 
+    public String[] getOpenGameCards() {
+        return hand.getCardsUrls();
+    }
+
     public void insertSkat() {
         addCardsToHand(skat);
         for(byte i = 0; i < skat.length; i++)
