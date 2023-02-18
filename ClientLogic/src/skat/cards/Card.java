@@ -1,4 +1,4 @@
-package skat.memory;
+package skat.cards;
 
 import java.io.Serializable;
 

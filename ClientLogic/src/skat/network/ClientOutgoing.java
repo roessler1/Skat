@@ -1,7 +1,8 @@
 package skat.network;
 
+import skat.cards.Card;
 import skat.log.Log;
-import skat.logic.LocalEvents;
+import skat.LogicEvents;
 
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -18,7 +19,18 @@ public class ClientOutgoing {
             this.out = new ObjectOutputStream(new BufferedOutputStream(out));
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
-            LocalEvents.getInstance().setErrorOccurred();
+            LogicEvents.getInstance().setErrorOccurred();
+        }
+    }
+
+    public void playCard(Card card) {
+        try {
+            out.writeByte(1);
+            out.flush();
+            out.writeObject(card);
+            out.flush();
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
     }
 

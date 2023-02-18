@@ -2,8 +2,8 @@ package skat.network;
 
 import skat.log.Log;
 import skat.logic.CardLogic;
-import skat.logic.LocalEvents;
-import skat.memory.Card;
+import skat.cards.Card;
+import skat.LogicEvents;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -21,16 +21,16 @@ public class ClientIncoming {
     private CardLogic cardLogic;
     private Runnable update = this::update;
 
-    public ClientIncoming(InputStream in) {
+    public ClientIncoming(InputStream in, CardLogic cardLogic) {
         try {
             this.in = new ObjectInputStream(new BufferedInputStream(in));
         } catch(IOException e) {
             Log.getLogger().severe(e.getMessage());
-            LocalEvents.getInstance().setErrorOccurred();
+            LogicEvents.getInstance().setErrorOccurred();
             return;
         }
         isUp = true;
-        cardLogic = CardLogic.getInstance();
+        this.cardLogic = cardLogic;
         executor = Executors.newSingleThreadScheduledExecutor();
         executor.execute(update);
     }
@@ -55,11 +55,22 @@ public class ClientIncoming {
             case 5 -> updatePlayerPoints();
             case 6 -> updateId();
             case 7 -> updateBid();
-            case 8 -> updateTurn();
+            case 8 -> LogicEvents.getInstance().setTurn();
             case 9 -> updateGame();
             case 10 -> updateGameAddition();
             case 11 -> updateSinglePlayerId();
             case 12 -> closeInput();
+            case 13 -> retryPlayCard();
+        }
+    }
+
+    private void retryPlayCard() {
+        try {
+            cardLogic.addCardsToHand((Card[]) in.readObject());
+            cardLogic.setGameId(in.readByte());
+            LogicEvents.getInstance().setTurn();
+        } catch(IOException | ClassNotFoundException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
     }
 
@@ -92,15 +103,6 @@ public class ClientIncoming {
             byte game = in.readByte();
             cardLogic.setGameId(game);
             //TODO -> announce game
-        } catch(IOException e) {
-            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
-        }
-    }
-
-    private void updateTurn() {
-        try {
-            boolean turn = in.readBoolean();
-            //TODO -> set turn
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -174,8 +176,7 @@ public class ClientIncoming {
             isUp = false;
             in.close();
             cardLogic = null;
-            CardLogic.deleteInstance();
-            LocalEvents.getInstance().closeConnection();
+            LogicEvents.getInstance().closeConnection();
             //TODO -> create main menu panel
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);

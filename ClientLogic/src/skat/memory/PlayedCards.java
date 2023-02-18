@@ -1,5 +1,7 @@
 package skat.memory;
 
+import skat.cards.Card;
+
 public class PlayedCards implements IPlayedCards {
 
     private Card[] playedCards;

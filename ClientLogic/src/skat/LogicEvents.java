@@ -1,6 +1,7 @@
-package skat.logic;
+package skat;
 
 import skat.log.Log;
+import skat.logic.CardLogic;
 import skat.network.ClientIncoming;
 import skat.network.ClientOutgoing;
 
@@ -8,23 +9,36 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 
-public class LocalEvents {
+public class LogicEvents {
 
-    static LocalEvents localEvents;
+    static LogicEvents logicEvents;
     private Socket socket;
     private boolean errorOccurred;
     private ClientIncoming incoming;
     private ClientOutgoing outgoing;
+    private CardLogic cardLogic;
+    private boolean turn;
 
-    private LocalEvents() {
-        localEvents = this;
+    private LogicEvents() {
+        logicEvents = this;
+        cardLogic = new CardLogic();
     }
 
-    public static LocalEvents getInstance() {
-        if(localEvents == null) {
-            new LocalEvents();
+    public static LogicEvents getInstance() {
+        if(logicEvents == null) {
+            new LogicEvents();
         }
-        return localEvents;
+        return logicEvents;
+    }
+
+    public void playCard(String cardUrl) {
+        if(cardLogic.getHandSize() > 10) {
+            cardLogic.putToSkat(cardUrl);
+        }
+        if(!turn)
+            return;
+        outgoing.playCard(cardLogic.getCardByUrl(cardUrl));
+        turn = false;
     }
 
     public void closeConnection() {
@@ -45,7 +59,7 @@ public class LocalEvents {
         try {
             socket = new Socket(address, 18081);
             outgoing = new ClientOutgoing(socket.getOutputStream());
-            incoming = new ClientIncoming(socket.getInputStream());
+            incoming = new ClientIncoming(socket.getInputStream(), cardLogic);
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
             setErrorOccurred();
@@ -57,21 +71,11 @@ public class LocalEvents {
         //TODO -> open card panel
     }
 
-    public void joinGame() {
-        //TODO -> start multicast client
-        //TODO -> open selection panel to display available servers
-    }
-
-    public void hostGame() {
-        //TODO -> start server and wait for incoming connections, open multicast server
-    }
-
-    public void exit() {
-        //TODO -> stop graphic rendering
-        System.exit(0);
-    }
-
     public void setErrorOccurred() {
         errorOccurred = true;
+    }
+
+    public void setTurn() {
+        turn = true;
     }
 }

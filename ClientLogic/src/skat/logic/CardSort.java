@@ -1,6 +1,6 @@
 package skat.logic;
 
-import skat.memory.Card;
+import skat.cards.Card;
 
 import java.util.ArrayList;
 
