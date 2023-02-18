@@ -3,19 +3,15 @@ package skat.logic;
 import skat.cards.Card;
 import skat.memory.Hand;
 import skat.memory.IHand;
-import skat.memory.IPlayedCards;
-import skat.memory.PlayedCards;
 
 public class CardLogic {
 
     private IHand hand;
-    private IPlayedCards playedCards;
     private byte gameId;
     private Card[] skat;
 
     public CardLogic() {
         hand = new Hand();
-        playedCards = new PlayedCards();
         gameId = 0;
     }
 
@@ -32,6 +28,11 @@ public class CardLogic {
 
     public Card[] getSkat() {
         return skat;
+    }
+
+    public void setSkat(Card[] skat) {
+        this.skat = skat;
+        //TODO -> create skat panel
     }
 
     public void putToSkat(String cardUrl) {
@@ -56,16 +57,6 @@ public class CardLogic {
     public void addCardsToHand(Card[] cards) {
         hand.addCards(cards);
         //TODO -> update Graphic
-    }
-
-    public void setPlayedCards(Card[] playedCards) {
-        this.playedCards.setPlayedCards(playedCards);
-        //TODO -> update Graphic
-    }
-
-    public void setSkat(Card[] skat) {
-        this.skat = skat;
-        //TODO -> create skat panel
     }
 
     public void setGameId(byte gameId) {

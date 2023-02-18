@@ -156,7 +156,7 @@ public class ClientIncoming {
     private void updatePlayedCards() {
         try {
             Card[] skat = (Card[]) in.readObject();
-            cardLogic.setPlayedCards(skat);
+            //TODO -> update played card panel
             //TODO -> update open game cards
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
