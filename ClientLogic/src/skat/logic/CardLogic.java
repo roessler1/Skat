@@ -7,12 +7,10 @@ import skat.memory.IHand;
 public class CardLogic {
 
     private IHand hand;
-    private byte gameId;
     private Card[] skat;
 
     public CardLogic() {
         hand = new Hand();
-        gameId = 0;
     }
 
     public String[] getOpenGameCards() {
@@ -60,7 +58,7 @@ public class CardLogic {
     }
 
     public void setGameId(byte gameId) {
-        this.gameId = gameId;
+        //TODO -> displaying game
         hand.sortCards(gameId);
     }
 }
