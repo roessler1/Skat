@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ClientLogic/ClientLogic.iml" filepath="$PROJECT_DIR$/ClientLogic/ClientLogic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Gui/Gui.iml" filepath="$PROJECT_DIR$/Gui/Gui.iml" />
       <module fileurl="file://$PROJECT_DIR$/Skat.iml" filepath="$PROJECT_DIR$/Skat.iml" />
     </modules>
   </component>
