@@ -1,4 +1,4 @@
-package com.example.skatfx;
+package com.example.skat;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

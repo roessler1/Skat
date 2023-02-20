@@ -1,11 +1,7 @@
-module com.example.skatfx {
+module com.example.skat {
     requires javafx.controls;
     requires javafx.fxml;
 
-    requires org.controlsfx.controls;
-    requires org.kordamp.bootstrapfx.core;
-    requires com.almasb.fxgl.all;
-
-    opens com.example.skatfx to javafx.fxml;
-    exports com.example.skatfx;
+    opens com.example.skat to javafx.fxml;
+    exports com.example.skat;
 }
