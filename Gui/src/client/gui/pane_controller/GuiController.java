@@ -1,6 +1,7 @@
-package gui.pane_controller;
+package client.gui.pane_controller;
 
-import gui.Gui;
+import client.gui.Gui;
+import client.gui.panes.ServerSelectionPane;
 import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
@@ -16,12 +17,17 @@ public class GuiController {
     }
 
     public void loadMainMenu() {
-        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("panes/main-menu-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/gui/panes/main-menu-view.fxml"));
         try {
             gui.getBorderPane().setCenter(fxmlLoader.load());
         } catch(IOException e) {
 
         }
+    }
+
+    public void loadServerSelection() {
+        gui.getBorderPane().setCenter(new ServerSelectionPane(gui.getBorderPane().getWidth(),
+                gui.getBorderPane().getHeight()));
     }
 
     public static void loadGuiController(Gui gui) {

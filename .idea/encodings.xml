@@ -3,6 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/ClientGui/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/ClientGui/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClientLogic/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ClientLogic/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Gui/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Gui/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />

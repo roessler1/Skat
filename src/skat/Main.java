@@ -1,6 +1,6 @@
 package skat;
 
-import gui.Gui;
+import client.gui.Gui;
 
 public class Main {
 

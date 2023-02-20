@@ -1,17 +1,19 @@
-package gui.pane_events;
+package client.gui.pane_events;
 
+import client.gui.pane_controller.GuiController;
+import client.logic.LogicEvents;
 import javafx.fxml.FXML;
 
 public class MainMenuEvents {
 
     @FXML
     protected void onHostButtonClicked() {
-        //TODO -> start server
+        LogicEvents.getInstance().startServer();
     }
 
     @FXML
     protected void onJoinButtonClicked() {
-        //TODO -> change to server selection pane
+        GuiController.getInstance().loadServerSelection();
     }
 
     @FXML

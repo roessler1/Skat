@@ -1,10 +1,11 @@
 module Gui {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.logging;
 
-
-    opens gui to javafx.fxml;
-    opens gui.pane_controller to javafx.fxml;
-    opens gui.pane_events to javafx.fxml;
-    exports gui;
+    opens client.gui to javafx.fxml;
+    opens client.gui.pane_controller to javafx.fxml;
+    opens client.gui.pane_events to javafx.fxml;
+    opens client.gui.panes;
+    exports client.gui;
 }

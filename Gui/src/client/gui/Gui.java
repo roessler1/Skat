@@ -1,6 +1,6 @@
-package gui;
+package client.gui;
 
-import gui.pane_controller.GuiController;
+import client.gui.pane_controller.GuiController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
