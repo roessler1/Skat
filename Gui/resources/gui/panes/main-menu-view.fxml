@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" spacing="20.0" style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="gui.pane_events.MainMenuEvents">
+
+    <Button text="Spiel hosten" onAction="#onHostButtonClicked" prefHeight="35" prefWidth="100"/>
+    <Button text="Spiel beitreten" onAction="#onJoinButtonClicked" prefHeight="35" prefWidth="100"/>
+    <Button text="Spiel verlassen" onAction="#onExitButtonClicked" prefHeight="35" prefWidth="100"/>
+
+</VBox>
