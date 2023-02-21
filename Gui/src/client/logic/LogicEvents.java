@@ -18,6 +18,7 @@ public class LogicEvents {
     private ClientOutgoing outgoing;
     private CardLogic cardLogic;
     private boolean turn;
+    private short bid;
 
     private LogicEvents() {
         logicEvents = this;
@@ -107,5 +108,13 @@ public class LogicEvents {
 
     public void setTurn() {
         turn = true;
+    }
+
+    public void setBid(short bid) {
+        this.bid = bid;
+    }
+
+    public short getBid() {
+        return bid;
     }
 }

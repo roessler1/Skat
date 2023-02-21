@@ -1,5 +1,6 @@
 package client.logic.network;
 
+import client.gui.pane_controller.GuiController;
 import client.logic.log.Log;
 import client.logic.logic.CardLogic;
 import client.logic.cards.Card;
@@ -19,7 +20,6 @@ public class ClientIncoming {
     private ExecutorService executor;
     private boolean isUp;
     private CardLogic cardLogic;
-    private Runnable update = this::update;
 
     public ClientIncoming(InputStream in, CardLogic cardLogic) {
         try {
@@ -32,6 +32,7 @@ public class ClientIncoming {
         isUp = true;
         this.cardLogic = cardLogic;
         executor = Executors.newSingleThreadScheduledExecutor();
+        Runnable update = this::update;
         executor.execute(update);
     }
 
@@ -110,8 +111,8 @@ public class ClientIncoming {
 
     private void updateBid() {
         try {
-            short bid = in.readShort();
-            //TODO -> create bid panel
+            LogicEvents.getInstance().setBid(in.readShort());
+            GuiController.getInstance().loadBidPanel();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

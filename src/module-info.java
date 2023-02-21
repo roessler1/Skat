@@ -1,3 +1,0 @@
-module Skat {
-    requires Gui;
-}

@@ -32,7 +32,7 @@ public class Gui extends Application {
         return borderPane;
     }
 
-    public void startGame() {
+    public static void main(String[] args) {
         launch();
     }
 }
