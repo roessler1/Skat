@@ -1,7 +1,7 @@
 package client.logic.network;
 
-import client.logic.cards.Card;
-import client.logic.log.Log;
+import skat.cards.Card;
+import skat.log.Log;
 import client.logic.LogicEvents;
 
 import java.io.BufferedOutputStream;

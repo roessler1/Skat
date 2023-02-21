@@ -1,9 +1,9 @@
 package client.logic.network;
 
 import client.gui.pane_controller.GuiController;
-import client.logic.log.Log;
+import skat.log.Log;
 import client.logic.logic.CardLogic;
-import client.logic.cards.Card;
+import skat.cards.Card;
 import client.logic.LogicEvents;
 
 import java.io.BufferedInputStream;
@@ -156,7 +156,7 @@ public class ClientIncoming {
 
     private void updatePlayedCards() {
         try {
-            Card[] skat = (Card[]) in.readObject();
+            String[] playedCards = (String[]) in.readObject();
             //TODO -> update played card panel
             //TODO -> update open game cards
         } catch(IOException | ClassNotFoundException e) {

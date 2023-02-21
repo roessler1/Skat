@@ -1,6 +1,6 @@
 package client.logic.logic;
 
-import client.logic.cards.Card;
+import skat.cards.Card;
 
 import java.util.ArrayList;
 

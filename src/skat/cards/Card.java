@@ -1,4 +1,4 @@
-package client.logic.cards;
+package skat.cards;
 
 import java.io.Serializable;
 

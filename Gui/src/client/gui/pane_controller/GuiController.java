@@ -2,8 +2,8 @@ package client.gui.pane_controller;
 
 import client.gui.Gui;
 import client.gui.panes.ServerSelectionPane;
-import client.logic.log.Log;
 import javafx.fxml.FXMLLoader;
+import skat.log.Log;
 
 import java.io.IOException;
 import java.util.logging.Level;

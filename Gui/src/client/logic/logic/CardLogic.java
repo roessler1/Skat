@@ -1,6 +1,6 @@
 package client.logic.logic;
 
-import client.logic.cards.Card;
+import skat.cards.Card;
 import client.logic.memory.Hand;
 import client.logic.memory.IHand;
 

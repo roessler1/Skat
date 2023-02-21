@@ -1,6 +1,7 @@
 package client.logic;
 
-import client.logic.log.Log;
+import server.Server;
+import skat.log.Log;
 import client.logic.logic.CardLogic;
 import client.logic.network.ClientIncoming;
 import client.logic.network.ClientOutgoing;
@@ -19,6 +20,7 @@ public class LogicEvents {
     private CardLogic cardLogic;
     private boolean turn;
     private short bid;
+    private Server server;
 
     private LogicEvents() {
         logicEvents = this;
@@ -99,7 +101,14 @@ public class LogicEvents {
     }
 
     public void startServer() {
-        //TODO -> start server and connect to it
+        server = new Server();
+        server.run();
+        buildConnection("127.0.0.1");
+        try {
+            server.join();
+        } catch(InterruptedException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
     public void setErrorOccurred() {
@@ -116,5 +125,10 @@ public class LogicEvents {
 
     public short getBid() {
         return bid;
+    }
+
+    public static void deleteInstance() {
+        logicEvents.closeConnection();
+        logicEvents = null;
     }
 }

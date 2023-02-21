@@ -1,4 +1,4 @@
-package client.logic.log;
+package skat.log;
 
 import java.io.IOException;
 import java.nio.file.Files;
