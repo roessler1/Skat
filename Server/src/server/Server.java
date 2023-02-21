@@ -1,8 +1,8 @@
 package server;
 
-import server.logic.ServerIncoming;
+import server.network.ServerIncoming;
 import server.logic.ServerLogic;
-import server.logic.ServerOutgoing;
+import server.network.ServerOutgoing;
 import server.multicast.IMulticastServer;
 import server.multicast.MulticastServer;
 import skat.log.Log;
@@ -85,5 +85,9 @@ public class Server extends Thread {
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
+    }
+
+    public ServerOutgoing getClient(byte playerId) {
+        return outgoings[playerId];
     }
 }

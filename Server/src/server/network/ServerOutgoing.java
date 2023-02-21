@@ -1,4 +1,4 @@
-package server.logic;
+package server.network;
 
 import skat.cards.Card;
 import skat.log.Log;
@@ -7,6 +7,7 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class ServerOutgoing {
@@ -26,11 +27,11 @@ public class ServerOutgoing {
         }
     }
 
-    public void sendRetrying(Card[] cards, byte gameId) {
+    public void sendRetrying(Card card, byte gameId) {
         try {
             out.writeByte(13);
             out.flush();
-            out.writeObject(cards);
+            out.writeObject(card);
             out.flush();
             out.writeByte(gameId);
             out.flush();
@@ -135,7 +136,7 @@ public class ServerOutgoing {
         }
     }
 
-    public void sendHand(Card[] hand) {
+    public void sendHand(ArrayList<Card> hand) {
         try {
             out.writeByte(1);
             out.flush();
@@ -146,11 +147,15 @@ public class ServerOutgoing {
         }
     }
 
-    public void sendPlayedCards(String[] playedCards) {
+    public void sendPlayedCards(Card[] playedCards) {
+        String[] cards = new String[playedCards.length];
+        for(byte i = 0; i < cards.length; i++) {
+            cards[i] = playedCards[i].getUrl();
+        }
         try {
             out.writeByte(2);
             out.flush();
-            out.writeObject(playedCards);
+            out.writeObject(cards);
             out.flush();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);

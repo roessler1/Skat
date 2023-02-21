@@ -7,7 +7,9 @@ import client.logic.network.ClientIncoming;
 import client.logic.network.ClientOutgoing;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 
 public class LogicEvents {
@@ -35,7 +37,7 @@ public class LogicEvents {
     }
 
     public void sendOpenGameCards() {
-        outgoing.sendOpenGameCards(cardLogic.getOpenGameCards());
+        outgoing.sendOpenGameCards();
     }
 
     public void sendBidAnswer(boolean answer) {
@@ -102,11 +104,10 @@ public class LogicEvents {
 
     public void startServer() {
         server = new Server();
-        server.run();
-        buildConnection("127.0.0.1");
+        server.start();
         try {
-            server.join();
-        } catch(InterruptedException e) {
+            buildConnection(InetAddress.getLocalHost().getHostAddress());
+        } catch(UnknownHostException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
     }

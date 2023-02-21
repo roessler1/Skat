@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface IHand {
 
-    void addCards(Card[] cards);
+    void addCards(ArrayList<Card> cards);
 
     Card getCard(String cardUrl);
 

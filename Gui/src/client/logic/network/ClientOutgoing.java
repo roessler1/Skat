@@ -23,11 +23,9 @@ public class ClientOutgoing {
         }
     }
 
-    public void sendOpenGameCards(String[] openCards) {
+    public void sendOpenGameCards() {
         try {
             out.writeByte(6);
-            out.flush();
-            out.writeObject(openCards);
             out.flush();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
