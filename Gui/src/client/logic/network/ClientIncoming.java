@@ -41,8 +41,10 @@ public class ClientIncoming {
     private void update() {
         do {
             try {
-                byte input = in.readByte();
-                resolveUpdate(input);
+                if(in.available() > 0) {
+                    byte input = in.readByte();
+                    resolveUpdate(input);
+                }
             } catch(IOException e) {
                 Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
             }
@@ -176,15 +178,10 @@ public class ClientIncoming {
     }
 
     public void closeInput() {
-        try {
-            isUp = false;
-            in.close();
-            cardLogic = null;
-            LogicEvents.getInstance().closeConnection();
-            //TODO -> create main menu panel
-        } catch(IOException e) {
-            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
-        }
+        isUp = false;
+        cardLogic = null;
+        LogicEvents.getInstance().closeConnection();
+        //TODO -> create main menu panel
     }
 
     public boolean isUp() {

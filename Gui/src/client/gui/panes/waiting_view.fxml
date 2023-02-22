@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<StackPane style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
+           fx:controller="client.gui.pane_events.WaitingEvents">
+    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #b9b9b9" maxWidth="300" maxHeight="200">
+        <Label text="Warten auf andere Spieler ..." maxWidth="290" maxHeight="150" prefHeight="150"
+               style="-fx-background-color: #ffffff; -fx-font-size: 14.0"  alignment="CENTER"/>
+        <Button onAction="#onBackButtonClicked" text="Hauptmenü"/>
+    </VBox>
+</StackPane>

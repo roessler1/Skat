@@ -1,5 +1,6 @@
 package client.logic;
 
+import client.gui.pane_controller.GuiController;
 import server.Server;
 import skat.log.Log;
 import client.logic.logic.CardLogic;
@@ -8,6 +9,7 @@ import client.logic.network.ClientOutgoing;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
@@ -27,6 +29,12 @@ public class LogicEvents {
     private LogicEvents() {
         logicEvents = this;
         cardLogic = new CardLogic();
+        socket = new Socket();
+        try {
+            socket.setReuseAddress(true);
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
     public static LogicEvents getInstance() {
@@ -77,10 +85,9 @@ public class LogicEvents {
             incoming.closeInput();
         } else {
             outgoing.closeOutput();
-            try {
-                socket.close();
-            } catch(IOException e) {
-                Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+            if(server != null) {
+                server.closeServer();
+                server = null;
             }
         }
 
@@ -88,7 +95,7 @@ public class LogicEvents {
 
     public void buildConnection(String address) {
         try {
-            socket = new Socket(address, 18081);
+            socket.connect(new InetSocketAddress(address, 18081));
             outgoing = new ClientOutgoing(socket.getOutputStream());
             incoming = new ClientIncoming(socket.getInputStream(), cardLogic);
         } catch(IOException e) {
@@ -98,8 +105,8 @@ public class LogicEvents {
         if(errorOccurred) {
             return;
         }
-        //TODO -> close selection panel
-        //TODO -> open card panel
+        GuiController.getInstance().loadWaiting();
+        GuiController.getInstance().loadCardPane();
     }
 
     public void startServer() {

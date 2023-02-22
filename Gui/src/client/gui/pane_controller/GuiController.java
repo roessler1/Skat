@@ -1,6 +1,7 @@
 package client.gui.pane_controller;
 
 import client.gui.Gui;
+import client.gui.panes.CardPane;
 import client.gui.panes.ServerSelectionPane;
 import javafx.fxml.FXMLLoader;
 import skat.log.Log;
@@ -12,6 +13,7 @@ public class GuiController {
 
     private static GuiController guiController;
     private Gui gui;
+    private CardPane cardPane;
 
     private GuiController(Gui gui) {
         guiController = this;
@@ -19,7 +21,8 @@ public class GuiController {
     }
 
     public void loadMainMenu() {
-        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/gui/panes/main-menu-view.fxml"));
+        gui.getBorderPane().setBottom(null);
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/main-menu-view.fxml"));
         try {
             gui.getBorderPane().setCenter(fxmlLoader.load());
         } catch(IOException e) {
@@ -27,13 +30,35 @@ public class GuiController {
         }
     }
 
+    public void loadCardPane() {
+        cardPane = new CardPane(gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight());
+        gui.getBorderPane().setBottom(cardPane);
+    }
+
+    public void addCards(String[] cardsUrls) {
+        cardPane.addCards(cardsUrls);
+    }
+
     public void loadServerSelection() {
         gui.getBorderPane().setCenter(new ServerSelectionPane(gui.getBorderPane().getWidth(),
                 gui.getBorderPane().getHeight()));
     }
 
+    public void unloadCenterPane() {
+        gui.getBorderPane().setCenter(null);
+    }
+
     public void loadBidPanel() {
-        FXMLLoader loader = new FXMLLoader(Gui.class.getResource("/gui/panes/bid-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/bid-view.fxml"));
+        try {
+            gui.getBorderPane().setCenter(loader.load());
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void loadWaiting() {
+        FXMLLoader loader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/waiting_view.fxml"));
         try {
             gui.getBorderPane().setCenter(loader.load());
         } catch(IOException e) {
