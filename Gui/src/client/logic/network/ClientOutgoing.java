@@ -1,7 +1,7 @@
 package client.logic.network;
 
-import client.logic.cards.Card;
-import client.logic.log.Log;
+import skat.cards.Card;
+import skat.log.Log;
 import client.logic.LogicEvents;
 
 import java.io.BufferedOutputStream;
@@ -23,11 +23,9 @@ public class ClientOutgoing {
         }
     }
 
-    public void sendOpenGameCards(String[] openCards) {
+    public void sendOpenGameCards() {
         try {
             out.writeByte(6);
-            out.flush();
-            out.writeObject(openCards);
             out.flush();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
@@ -91,7 +89,18 @@ public class ClientOutgoing {
 
     public void closeOutput() {
         try {
+            out.writeByte(7);
+            out.flush();
             out.close();
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void playNextRound() {
+        try {
+            out.writeByte(8);
+            out.flush();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

@@ -1,6 +1,6 @@
-package client.logic.logic;
+package skat.compare;
 
-import client.logic.cards.Card;
+import skat.cards.Card;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class CardSort {
         return cards;
     }
 
-    private byte compareByGame(Card card1, Card card2, byte game) {
+    public byte compareByGame(Card card1, Card card2, byte game) {
         switch(game) {
             case 9 -> {
                 return compareDiamonds(card1, card2);
@@ -33,7 +33,7 @@ public class CardSort {
             case 12, 24 -> {
                 return compareGrand(card1, card2);
             }
-            case 23 -> {
+            case 23, 35, 46, 59 -> {
                 return compareNull(card1, card2);
             }
             default -> {

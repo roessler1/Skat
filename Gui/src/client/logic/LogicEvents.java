@@ -1,12 +1,15 @@
 package client.logic;
 
-import client.logic.log.Log;
+import server.Server;
+import skat.log.Log;
 import client.logic.logic.CardLogic;
 import client.logic.network.ClientIncoming;
 import client.logic.network.ClientOutgoing;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 
 public class LogicEvents {
@@ -19,6 +22,7 @@ public class LogicEvents {
     private CardLogic cardLogic;
     private boolean turn;
     private short bid;
+    private Server server;
 
     private LogicEvents() {
         logicEvents = this;
@@ -33,7 +37,7 @@ public class LogicEvents {
     }
 
     public void sendOpenGameCards() {
-        outgoing.sendOpenGameCards(cardLogic.getOpenGameCards());
+        outgoing.sendOpenGameCards();
     }
 
     public void sendBidAnswer(boolean answer) {
@@ -99,7 +103,13 @@ public class LogicEvents {
     }
 
     public void startServer() {
-        //TODO -> start server and connect to it
+        server = new Server();
+        server.start();
+        try {
+            buildConnection(InetAddress.getLocalHost().getHostAddress());
+        } catch(UnknownHostException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
     public void setErrorOccurred() {
@@ -116,5 +126,14 @@ public class LogicEvents {
 
     public short getBid() {
         return bid;
+    }
+
+    public void playNextRound() {
+        outgoing.playNextRound();
+    }
+
+    public static void deleteInstance() {
+        logicEvents.closeConnection();
+        logicEvents = null;
     }
 }

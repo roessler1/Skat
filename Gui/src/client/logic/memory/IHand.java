@@ -1,12 +1,12 @@
 package client.logic.memory;
 
-import client.logic.cards.Card;
+import skat.cards.Card;
 
 import java.util.ArrayList;
 
 public interface IHand {
 
-    void addCards(Card[] cards);
+    void addCards(ArrayList<Card> cards);
 
     Card getCard(String cardUrl);
 

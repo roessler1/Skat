@@ -1,8 +1,11 @@
 package client.logic.logic;
 
-import client.logic.cards.Card;
+import skat.cards.Card;
 import client.logic.memory.Hand;
 import client.logic.memory.IHand;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CardLogic {
 
@@ -18,7 +21,7 @@ public class CardLogic {
     }
 
     public void insertSkat() {
-        addCardsToHand(skat);
+        addCardsToHand(new ArrayList<>(Arrays.asList(skat)));
         for(byte i = 0; i < skat.length; i++)
             skat[i] = null;
         //TODO -> update skat panel
@@ -52,7 +55,7 @@ public class CardLogic {
         return hand.getCard(cardUrl);
     }
 
-    public void addCardsToHand(Card[] cards) {
+    public void addCardsToHand(ArrayList<Card> cards) {
         hand.addCards(cards);
         //TODO -> update Graphic
     }
