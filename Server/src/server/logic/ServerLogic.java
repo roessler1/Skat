@@ -12,6 +12,7 @@ public class ServerLogic {
     private PointsLogic pointsLogic;
     private byte outPlayed;
     private byte singlePlayer;
+    private boolean[] next;
 
     public ServerLogic(Server server) {
         this.server = server;
@@ -19,6 +20,7 @@ public class ServerLogic {
         cardLogic = new CardPartLogic();
         pointsLogic = new PointsLogic();
         singlePlayer = -1;
+        next = new boolean[3];
     }
 
     public void playCard(Card card, byte playerId) {
@@ -33,7 +35,7 @@ public class ServerLogic {
                 calculatePoints();
                 cardLogic.emptyPlayedCards();
                 if(cardLogic.isComplete()) {
-                    //TODO -> calculate results
+                    finishRound();
                     return;
                 }
                 server.getClient(outPlayed).sendTurn();
@@ -51,13 +53,17 @@ public class ServerLogic {
     }
 
     public void startNextRound() {
+        for(byte i = 0; i < next.length; i++) {
+            next[i] = false;
+        }
+        pointsLogic.nextRound();
         bidLogic.resetBids();
         outPlayed = bidLogic.getListening();
         cardLogic.shuffleCards();
         for(byte i = 0; i < 3; i++) {
             server.getClient(i).sendHand(cardLogic.getHand(i));
         }
-        //TODO -> send speaking player first bid
+        bidLogic.nextBid();
     }
 
     private void calculatePoints() {
@@ -78,8 +84,11 @@ public class ServerLogic {
             }
         }
         if(outPlayed == singlePlayer) {
-            if(pointsLogic.getGameId() == 23 || pointsLogic.getGameId() == 35 || pointsLogic.getGameId() == 46 || pointsLogic.getGameId() == 59)
+            if(pointsLogic.getGameId() == 23 || pointsLogic.getGameId() == 35 || pointsLogic.getGameId() == 46 ||
+                    pointsLogic.getGameId() == 59 || pointsLogic.getPriceStage() == 5) {
                 pointsLogic.giveUp(singlePlayer);
+                finishRound();
+            }
             pointsLogic.addSinglePoints(points);
         } else {
             pointsLogic.addDoublePoints(points);
@@ -140,5 +149,30 @@ public class ServerLogic {
                 server.getClient(i).sendSinglePlayer(singlePlayer);
             }
         }
+    }
+
+    protected void finishRound() {
+        pointsLogic.calculateResults(singlePlayer);
+        for(byte i = 0; i < 3; i++) {
+            server.getClient(i).sendPlayerPoints(pointsLogic.getPoints());
+        }
+    }
+
+    public void closeServer() {
+        for(byte i = 0; i < 3; i++) {
+            server.getClient(i).sendClosing();
+            server.closeServer();
+        }
+    }
+
+    public void nextRound(byte playerId) {
+        next[playerId] = true;
+        byte count = 0;
+        for(boolean allowed:next) {
+            if(allowed)
+                count++;
+        }
+        if(count == 3)
+            startNextRound();
     }
 }

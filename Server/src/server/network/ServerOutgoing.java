@@ -103,7 +103,7 @@ public class ServerOutgoing {
         }
     }
 
-    public void sendPlayerPoints(byte[] playerPoints) {
+    public void sendPlayerPoints(short[] playerPoints) {
         try {
             out.writeByte(5);
             out.flush();

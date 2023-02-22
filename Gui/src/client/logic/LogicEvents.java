@@ -128,6 +128,10 @@ public class LogicEvents {
         return bid;
     }
 
+    public void playNextRound() {
+        outgoing.playNextRound();
+    }
+
     public static void deleteInstance() {
         logicEvents.closeConnection();
         logicEvents = null;

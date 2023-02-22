@@ -36,6 +36,8 @@ public class ServerIncoming {
             case 4 -> receivePriceStage();
             case 5 -> receiveBidAnswer();
             case 6 -> logic.openGameCards();
+            case 7 -> logic.closeServer();
+            case 8 -> logic.nextRound(playerId);
         }
     }
 

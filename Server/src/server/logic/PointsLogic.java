@@ -37,24 +37,39 @@ public class PointsLogic {
 
     protected void calculateResults(byte singlePlayer) {
         boolean isZeroGame = switch(gameId) {
-            case 23, 35, 46, 59: yield true;
-            default: yield false;
+            case 23, 35, 46, 59:
+                yield true;
+            default:
+                yield false;
         };
         if(isZeroGame) {
             points[singlePlayer] += gameId;
+            return;
         }
-        if(singlePoints == 120 && !isZeroGame) {
+        if(priceStage > 3 && singlePoints != 120) {
+            priceStage = (byte) (-priceStage);
+            priceStage -= calculateStage();
+            priceStage *= 2;
+            points[singlePlayer] += priceStage*gameId;
+            return;
+        }
+        if(priceStage == 3 && singlePoints < 91) {
+            priceStage = (byte) (-priceStage);
+            priceStage -= calculateStage();
+            priceStage *= 2;
+            points[singlePlayer] += priceStage*gameId;
+            return;
+        }
+        if(singlePoints == 120)
             priceStage++;
-        }
-        if(singlePoints > 90 && !isZeroGame) {
+        if(singlePoints > 90)
             priceStage++;
-        }
         priceStage += calculateStage();
-        if(singlePoints > doublePoints) {
-            points[singlePlayer] += (priceStage*gameId);
-        } else {
-            points[singlePlayer] += ((priceStage*gameId)*-2);
+        if(bid > priceStage*gameId || doublePoints >= singlePoints) {
+            priceStage *= 2;
+            priceStage = (byte) -priceStage;
         }
+        points[singlePlayer] += gameId*priceStage;
     }
 
     protected short[] getPoints() {
@@ -81,7 +96,7 @@ public class PointsLogic {
         this.priceStage = priceStage;
     }
 
-    protected byte calculateStage() {
+    private byte calculateStage() {
         if(peaks.contains((byte) 1)) {
             byte max = 1;
             while(peaks.contains((byte) (max+1))) {
@@ -100,7 +115,10 @@ public class PointsLogic {
     }
 
     protected void giveUp(byte singlePlayer) {
-        points[singlePlayer] += (gameId*-2);
+        if(gameId == 23 || gameId == 35 || gameId == 46 || gameId == 59)
+            points[singlePlayer] += (gameId*-2);
+        else
+            points[singlePlayer] += (gameId*priceStage*-2);
     }
 
     protected void addPeak(Card card) {
@@ -129,5 +147,9 @@ public class PointsLogic {
                 }
             }
         }
+    }
+
+    protected byte getPriceStage() {
+        return priceStage;
     }
 }

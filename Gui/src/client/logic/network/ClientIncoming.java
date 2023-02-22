@@ -132,7 +132,7 @@ public class ClientIncoming {
 
     private void updatePlayerPoints() {
         try {
-            byte[] points = (byte[]) in.readObject();
+            short[] points = (short[]) in.readObject();
             //TODO -> open result panel
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
