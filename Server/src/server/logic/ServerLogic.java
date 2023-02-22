@@ -7,9 +7,6 @@ import skat.compare.CardSort;
 public class ServerLogic {
 
     private Server server;
-    private byte speaking;
-    private byte listening;
-    private byte giving;
     private BidPartLogic bidLogic;
     private CardPartLogic cardLogic;
     private PointsLogic pointsLogic;
@@ -18,10 +15,7 @@ public class ServerLogic {
 
     public ServerLogic(Server server) {
         this.server = server;
-        giving = 2;
-        listening = 0;
-        speaking = 1;
-        bidLogic = new BidPartLogic();
+        bidLogic = new BidPartLogic(server, this);
         cardLogic = new CardPartLogic();
         pointsLogic = new PointsLogic();
         singlePlayer = -1;
@@ -56,16 +50,9 @@ public class ServerLogic {
             server.getClient(playerId).sendRetrying(card, pointsLogic.getGameId());
     }
 
-    private void rotateRound() {
-        byte temp = giving;
-        giving = listening;
-        listening = speaking;
-        speaking = temp;
-    }
-
     public void startNextRound() {
-        rotateRound();
-        outPlayed = listening;
+        bidLogic.resetBids();
+        outPlayed = bidLogic.getListening();
         cardLogic.shuffleCards();
         for(byte i = 0; i < 3; i++) {
             server.getClient(i).sendHand(cardLogic.getHand(i));
@@ -78,16 +65,17 @@ public class ServerLogic {
         while(outPlayed > 0) {
             Card temp = currentPlayed[0];
             currentPlayed[0] = currentPlayed[2];
-            currentPlayed[1] = currentPlayed[0];
             currentPlayed[2] = currentPlayed[1];
+            currentPlayed[1] = temp;
             outPlayed--;
         }
         CardSort sort = new CardSort();
         byte points = currentPlayed[0].getValue();
         for(byte i = 1; i < 3; i++) {
-            if(sort.compareByGame(currentPlayed[outPlayed], currentPlayed[i], pointsLogic.getGameId()) == 1)
+            if(sort.compareByGame(currentPlayed[outPlayed], currentPlayed[i], pointsLogic.getGameId()) == 1) {
                 outPlayed = i;
                 points += currentPlayed[i].getValue();
+            }
         }
         if(outPlayed == singlePlayer) {
             if(pointsLogic.getGameId() == 23 || pointsLogic.getGameId() == 35 || pointsLogic.getGameId() == 46 || pointsLogic.getGameId() == 59)
@@ -123,8 +111,13 @@ public class ServerLogic {
         server.getClient(outPlayed).sendTurn();
     }
 
-    public void answerBid(boolean answer) {
-        //TODO -> add bid functionality
+    public void answerBid(boolean answer, byte playerId) {
+        if(!answer)
+            bidLogic.pass(playerId);
+        else if(bidLogic.isAccepted())
+            bidLogic.nextBid();
+        else
+            bidLogic.acceptBid();
     }
 
     public void openGameCards() {
@@ -134,6 +127,18 @@ public class ServerLogic {
                 continue;
             }
             server.getClient(i).sendOpenGameCards(hand);
+        }
+    }
+
+    protected void setSinglePlayer(byte playerId) {
+        singlePlayer = playerId;
+        pointsLogic.setBid(bidLogic.getCurrentBid());
+        for(byte i = 0; i < 3; i++) {
+            if(i == singlePlayer) {
+                server.getClient(i).sendSkat(cardLogic.getSkat());
+            } else {
+                server.getClient(i).sendSinglePlayer(singlePlayer);
+            }
         }
     }
 }

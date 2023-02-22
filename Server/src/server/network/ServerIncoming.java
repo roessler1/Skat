@@ -41,7 +41,7 @@ public class ServerIncoming {
 
     private void receiveBidAnswer() {
         try {
-            logic.answerBid(in.readBoolean());
+            logic.answerBid(in.readBoolean(), playerId);
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

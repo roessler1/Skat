@@ -12,6 +12,7 @@ public class PointsLogic {
     private byte doublePoints;
     private short[] points;
     private ArrayList<Byte> peaks;
+    private short bid;
 
     protected PointsLogic() {
         gameId = 0;
@@ -28,6 +29,10 @@ public class PointsLogic {
         singlePoints = 0;
         doublePoints = 0;
         peaks.clear();
+    }
+
+    protected void setBid(short bid) {
+        this.bid = bid;
     }
 
     protected void calculateResults(byte singlePlayer) {
