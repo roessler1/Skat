@@ -67,6 +67,6 @@
                   </RadioButton>
 
             </HBox>
-            <Button text="Bestätigen" onMouseClicked="#onConfirmButtonClicked" prefWidth="80" prefHeight="35"/>
+            <Button text="Bestätigen" onAction="#onConfirmButtonClicked" prefWidth="80" prefHeight="35"/>
       </VBox>
 </StackPane>
