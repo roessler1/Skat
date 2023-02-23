@@ -147,4 +147,8 @@ public class LogicEvents {
     public boolean isBiddingOver() {
         return cardLogic.hasSkat();
     }
+
+    public boolean isHandGame() {
+        return cardLogic.isHandGame();
+    }
 }

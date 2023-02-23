@@ -11,9 +11,11 @@ public class CardLogic {
 
     private IHand hand;
     private Card[] skat;
+    private boolean handGame;
 
     public CardLogic() {
         hand = new Hand();
+        handGame = false;
     }
 
     public String[] getOpenGameCards() {
@@ -22,6 +24,7 @@ public class CardLogic {
 
     public void insertSkat() {
         addCardsToHand(new ArrayList<>(Arrays.asList(skat)));
+        handGame = true;
         for(byte i = 0; i < skat.length; i++)
             skat[i] = null;
         //TODO -> update skat panel
@@ -67,5 +70,11 @@ public class CardLogic {
 
     public boolean hasSkat() {
         return skat != null;
+    }
+
+    public boolean isHandGame() {
+        boolean handGame = this.handGame;
+        this.handGame = false;
+        return handGame;
     }
 }

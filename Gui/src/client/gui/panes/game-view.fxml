@@ -37,7 +37,7 @@
                               <fx:reference source="gameId"/>
                         </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="23" text="Nullspiel">
+                  <RadioButton fx:id="twentythree" text="Nullspiel">
                         <toggleGroup>
                               <fx:reference source="gameId"/>
                         </toggleGroup>
@@ -60,7 +60,7 @@
                               <fx:reference source="priceStaging"/>
                         </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="five" text="Ouvert">
+                  <RadioButton fx:id="five"  text="Ouvert">
                         <toggleGroup>
                               <fx:reference source="priceStaging"/>
                         </toggleGroup>
