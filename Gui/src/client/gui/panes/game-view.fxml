@@ -50,17 +50,17 @@
                               <ToggleGroup fx:id="priceStaging"/>
                         </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="3" text="Schneider angesagt">
+                  <RadioButton fx:id="three" text="Schneider angesagt">
                         <toggleGroup>
                               <fx:reference source="priceStaging"/>
                         </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="4" text="Schwarz angesagt">
+                  <RadioButton fx:id="four" text="Schwarz angesagt">
                         <toggleGroup>
                               <fx:reference source="priceStaging"/>
                         </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="5" text="Ouvert">
+                  <RadioButton fx:id="five" text="Ouvert">
                         <toggleGroup>
                               <fx:reference source="priceStaging"/>
                         </toggleGroup>

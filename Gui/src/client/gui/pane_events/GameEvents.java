@@ -13,12 +13,14 @@ public class GameEvents implements Initializable {
 
     @FXML
     ToggleGroup gameId;
-
-    @FXML
-    ToggleGroup priceStaging;
-
     @FXML
     RadioButton normal;
+    @FXML
+    RadioButton three;
+    @FXML
+    RadioButton four;
+    @FXML
+    RadioButton five;
     @FXML
     protected void onConfirmButtonClicked() {
         RadioButton selectedRadioButton = (RadioButton) gameId.getSelectedToggle();
@@ -32,6 +34,9 @@ public class GameEvents implements Initializable {
             normal.setText("Handspiel");
         } else {
             normal.setText("Normales Spiel");
+            three.setDisable(true);
+            four.setDisable(true);
+            five.setDisable(true);
         }
     }
 }
