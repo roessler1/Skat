@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
+           fx:controller="client.gui.pane_events.GameEvents">
+      <StackPane style="-fx-background-color: #b9b9b9; -fx-padding: 5 5 5 5;" maxWidth="700" maxHeight="400">
+            <HBox alignment="CENTER" style="-fx-background-color: #ffffff" spacing="30.0" maxWidth="700" maxHeight="400">
+
+                  <RadioButton selected="true" fx:id="12" text="Eichel">
+                        <toggleGroup>
+                              <ToggleGroup fx:id="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="11" text="Blatt">
+                        <toggleGroup>
+                              <fx:reference source="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="10" text="Herz">
+                        <toggleGroup>
+                              <fx:reference source="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="9" text="Schellen">
+                        <toggleGroup>
+                              <fx:reference source="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="24" text="Grand">
+                        <toggleGroup>
+                              <fx:reference source="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="23" text="Nullspiel">
+                        <toggleGroup>
+                              <fx:reference source="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+
+
+                  <Button text="Bestätigen" onMouseClicked="#onConfirmButtonClicked" prefWidth="80" prefHeight="35"/>
+            </HBox>
+      </StackPane>
+</StackPane>

@@ -22,7 +22,7 @@ public class GuiController {
 
     public void loadMainMenu() {
         gui.getBorderPane().setBottom(null);
-        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/main-menu-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/game-view.fxml"));
         try {
             gui.getBorderPane().setCenter(fxmlLoader.load());
         } catch(IOException e) {
@@ -58,7 +58,7 @@ public class GuiController {
     }
 
     public void loadWaiting() {
-        FXMLLoader loader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/waiting_view.fxml"));
+        FXMLLoader loader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/waiting-view.fxml"));
         try {
             gui.getBorderPane().setCenter(loader.load());
         } catch(IOException e) {
