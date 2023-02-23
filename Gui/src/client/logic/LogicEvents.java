@@ -67,6 +67,7 @@ public class LogicEvents {
     public void sendSkat() {
         if(cardLogic.getHandSize() == 10) {
             outgoing.sendSkat(cardLogic.getSkat());
+            GuiController.getInstance().loadGameSelection();
         }
     }
 

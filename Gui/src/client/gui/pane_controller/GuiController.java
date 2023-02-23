@@ -30,6 +30,26 @@ public class GuiController {
         }
     }
 
+    public void loadGameSelection() {
+        gui.getBorderPane().setBottom(null);
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/game-view.fxml"));
+        try {
+            gui.getBorderPane().setCenter(fxmlLoader.load());
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void loadResults() {
+        gui.getBorderPane().setBottom(null);
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/results-view.fxml"));
+        try {
+            gui.getBorderPane().setCenter(fxmlLoader.load());
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
     public void loadCardPane() {
         cardPane = new CardPane(gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight());
         gui.getBorderPane().setBottom(cardPane);

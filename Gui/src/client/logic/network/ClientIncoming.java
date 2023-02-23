@@ -135,7 +135,8 @@ public class ClientIncoming {
     private void updatePlayerPoints() {
         try {
             short[] points = (short[]) in.readObject();
-            //TODO -> open result panel
+            //TODO -> displaying points on results pane
+            GuiController.getInstance().loadResults();
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
