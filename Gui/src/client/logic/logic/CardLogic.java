@@ -64,4 +64,8 @@ public class CardLogic {
         //TODO -> displaying game
         hand.sortCards(gameId);
     }
+
+    public boolean hasSkat() {
+        return skat != null;
+    }
 }

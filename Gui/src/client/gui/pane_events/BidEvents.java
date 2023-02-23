@@ -14,6 +14,9 @@ public class BidEvents implements Initializable {
     private Button bid;
 
     @FXML
+    private Button pass;
+
+    @FXML
     protected void onBidButtonClicked() {
         LogicEvents.getInstance().sendBidAnswer(true);
     }
@@ -23,8 +26,28 @@ public class BidEvents implements Initializable {
         LogicEvents.getInstance().sendBidAnswer(false);
     }
 
+    @FXML
+    protected void onPickupButtonClicked() {
+        // TODO -> Skat aufnehmen Button
+    }
+
+    @FXML
+    protected  void onHandgameButtonClicked() {
+        // TODO -> Handspiel Button
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        bid.setText(String.valueOf(LogicEvents.getInstance().getBid()));
+        if(LogicEvents.getInstance().isBiddingOver()) {
+            bid.setOnMouseClicked(e -> onHandgameButtonClicked());
+            pass.setOnMouseClicked(e -> onPickupButtonClicked());
+            bid.setText("Handspiel");
+            pass.setText("Skat aufnehmen");
+        } else {
+            bid.setOnMouseClicked(e -> onBidButtonClicked());
+            pass.setOnMouseClicked(e -> onPassButtonClicked());
+            bid.setText(String.valueOf(LogicEvents.getInstance().getBid()));
+            pass.setText("Passen");
+        }
     }
 }

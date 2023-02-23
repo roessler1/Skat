@@ -5,6 +5,6 @@
 <HBox alignment="CENTER" spacing="115.0" style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
       fx:controller="client.gui.pane_events.BidEvents">
 
-    <Button fx:id="bid" onAction="#onBidButtonClicked" prefWidth="80" prefHeight="35"/>
-    <Button text="Passen" onAction="#onPassButtonClicked" prefWidth="80" prefHeight="35"/>
+    <Button fx:id="bid" prefWidth="80" prefHeight="35"/>
+    <Button fx:id="pass" onAction="#onPassButtonClicked" prefWidth="80" prefHeight="35"/>
 </HBox>

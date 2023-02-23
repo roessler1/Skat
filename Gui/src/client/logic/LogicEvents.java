@@ -143,4 +143,8 @@ public class LogicEvents {
         logicEvents.closeConnection();
         logicEvents = null;
     }
+
+    public boolean isBiddingOver() {
+        return cardLogic.hasSkat();
+    }
 }
