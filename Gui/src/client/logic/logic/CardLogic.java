@@ -1,5 +1,6 @@
 package client.logic.logic;
 
+import client.gui.pane_controller.GuiController;
 import skat.cards.Card;
 import client.logic.memory.Hand;
 import client.logic.memory.IHand;
@@ -9,7 +10,7 @@ import java.util.Arrays;
 
 public class CardLogic {
 
-    private IHand hand;
+    private final IHand hand;
     private Card[] skat;
     private boolean handGame;
 
@@ -60,7 +61,7 @@ public class CardLogic {
 
     public void addCardsToHand(ArrayList<Card> cards) {
         hand.addCards(cards);
-        //TODO -> update Graphic
+        GuiController.getInstance().addCards(hand.getCardsUrls());
     }
 
     public void setGameId(byte gameId) {

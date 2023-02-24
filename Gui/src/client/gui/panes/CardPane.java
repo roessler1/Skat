@@ -26,6 +26,8 @@ public class CardPane extends HBox {
     }
 
     public void addCards(String[] cardsUrls) {
+        labels.clear();
+        this.getChildren().clear();
         Label label = new Label();
         for(String card:cardsUrls) {
             label.setAlignment(Pos.TOP_LEFT);
