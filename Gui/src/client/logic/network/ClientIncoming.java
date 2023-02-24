@@ -108,7 +108,6 @@ public class ClientIncoming {
         try {
             byte game = in.readByte();
             cardLogic.setGameId(game);
-            //TODO -> announce game
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -125,8 +124,7 @@ public class ClientIncoming {
 
     private void updateId() {
         try {
-            byte id = in.readByte();
-            //TODO -> set own id
+            LogicEvents.getInstance().setPlayerId(in.readByte());
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -154,7 +152,7 @@ public class ClientIncoming {
     private void updateSkat() {
         try {
             cardLogic.setSkat((Card[]) in.readObject());
-            //TODO -> create skat panel
+            GuiController.getInstance().loadBidPanel();
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -182,7 +180,6 @@ public class ClientIncoming {
         isUp = false;
         cardLogic = null;
         LogicEvents.getInstance().closeConnection();
-        //TODO -> create main menu panel
     }
 
     public boolean isUp() {

@@ -54,6 +54,7 @@ public class SkatEvents implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        LogicEvents.getInstance().setSkatEvents(this);
         double screenWidth = GuiController.getInstance().getGui().getBorderPane().getWidth();
         double screenHeight = GuiController.getInstance().getGui().getBorderPane().getHeight();
         cardWidth = 190*(screenWidth*100/1920)/100;

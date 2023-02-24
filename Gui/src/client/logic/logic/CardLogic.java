@@ -1,6 +1,7 @@
 package client.logic.logic;
 
 import client.gui.pane_controller.GuiController;
+import client.gui.pane_events.SkatEvents;
 import skat.cards.Card;
 import client.logic.memory.Hand;
 import client.logic.memory.IHand;
@@ -13,6 +14,7 @@ public class CardLogic {
     private final IHand hand;
     private Card[] skat;
     private boolean handGame;
+    private SkatEvents skatEvents;
 
     public CardLogic() {
         hand = new Hand();
@@ -28,7 +30,7 @@ public class CardLogic {
         handGame = false;
         for(byte i = 0; i < skat.length; i++)
             skat[i] = null;
-        //TODO -> update skat panel
+        GuiController.getInstance().loadSkatPane();
     }
 
     public Card[] getSkat() {
@@ -37,17 +39,16 @@ public class CardLogic {
 
     public void setSkat(Card[] skat) {
         this.skat = skat;
-        //TODO -> create skat panel
     }
 
     public void putToSkat(String cardUrl) {
         if(skat[0] == null) {
             skat[0] = hand.removeByUrl(cardUrl);
-            //TODO -> update graphic
+            skatEvents.pushCard(skat[0].getUrl());
         }
         if(skat[1] == null) {
             skat[1] = hand.removeByUrl(cardUrl);
-            //TODO -> update graphic
+            skatEvents.pushCard(skat[1].getUrl());
         }
     }
 
@@ -77,5 +78,8 @@ public class CardLogic {
         boolean handGame = this.handGame;
         this.handGame = true;
         return handGame;
+    }
+    public void setSkatEvents(SkatEvents events) {
+        skatEvents = events;
     }
 }

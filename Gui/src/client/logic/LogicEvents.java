@@ -1,6 +1,7 @@
 package client.logic;
 
 import client.gui.pane_controller.GuiController;
+import client.gui.pane_events.SkatEvents;
 import server.Server;
 import skat.log.Log;
 import client.logic.logic.CardLogic;
@@ -25,6 +26,7 @@ public class LogicEvents {
     private boolean turn;
     private short bid;
     private Server server;
+    private byte playerId;
 
     private LogicEvents() {
         logicEvents = this;
@@ -90,6 +92,7 @@ public class LogicEvents {
                 server.closeServer();
                 server = null;
             }
+            GuiController.getInstance().loadMainMenu();
         }
 
     }
@@ -151,5 +154,13 @@ public class LogicEvents {
 
     public boolean isHandGame() {
         return cardLogic.isHandGame();
+    }
+
+    public void setPlayerId(byte playerId) {
+        this.playerId = playerId;
+    }
+
+    public void setSkatEvents(SkatEvents events) {
+        cardLogic.setSkatEvents(events);
     }
 }

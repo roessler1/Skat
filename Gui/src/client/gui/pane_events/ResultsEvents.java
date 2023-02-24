@@ -26,13 +26,13 @@ public class ResultsEvents implements Initializable {
 
     @FXML
     protected void onNextRoundButtonClicked() {
-        // TODO -> Nächste Runde Button
+        LogicEvents.getInstance().playNextRound();
+        GuiController.getInstance().loadWaiting();
     }
 
     @FXML
     protected void onBackButtonClicked() {
         LogicEvents.deleteInstance();
-        GuiController.getInstance().loadMainMenu();
     }
 
     @Override
