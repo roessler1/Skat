@@ -28,12 +28,12 @@ public class BidEvents implements Initializable {
 
     @FXML
     protected void onPickupButtonClicked() {
-        // TODO -> Skat aufnehmen Button
+        LogicEvents.getInstance().insertSkat();
     }
 
     @FXML
     protected  void onHandgameButtonClicked() {
-        // TODO -> Handspiel Button
+        LogicEvents.getInstance().sendSkat();
     }
 
     @Override
@@ -43,6 +43,8 @@ public class BidEvents implements Initializable {
             pass.setOnMouseClicked(e -> onPickupButtonClicked());
             bid.setText("Handspiel");
             pass.setText("Skat aufnehmen");
+            bid.setPrefWidth(110);
+            pass.setPrefWidth(110);
         } else {
             bid.setOnMouseClicked(e -> onBidButtonClicked());
             pass.setOnMouseClicked(e -> onPassButtonClicked());
