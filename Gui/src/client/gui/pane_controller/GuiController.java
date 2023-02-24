@@ -2,6 +2,7 @@ package client.gui.pane_controller;
 
 import client.gui.Gui;
 import client.gui.panes.CardPane;
+import client.gui.panes.PlayedCardPane;
 import client.gui.panes.ServerSelectionPane;
 import javafx.fxml.FXMLLoader;
 import skat.log.Log;
@@ -14,6 +15,7 @@ public class GuiController {
     private static GuiController guiController;
     private Gui gui;
     private CardPane cardPane;
+    private PlayedCardPane playedCardPane;
 
     private GuiController(Gui gui) {
         guiController = this;
@@ -28,6 +30,15 @@ public class GuiController {
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
+    }
+
+    public void loadPlayedCards() {
+        playedCardPane = new PlayedCardPane(gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight());
+        gui.getBorderPane().setCenter(playedCardPane);
+    }
+
+    public void addPlayedCard(String[] cards) {
+        playedCardPane.addPlayedCards(cards);
     }
 
     public void loadGameSelection() {

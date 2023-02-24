@@ -1,13 +1,17 @@
 package client.gui.panes;
 
+import client.gui.Gui;
 import client.logic.LogicEvents;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import skat.log.Log;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class CardPane extends HBox {
 
@@ -31,7 +35,12 @@ public class CardPane extends HBox {
         Label label = new Label();
         for(String card:cardsUrls) {
             label.setAlignment(Pos.TOP_LEFT);
-            ImageView view = new ImageView(new Image(card, width, height, true, false));
+            ImageView view = null;
+            try {
+                view = new ImageView(new Image(Gui.class.getResource(card).openStream(), width, height, true, false));
+            } catch(IOException e) {
+                Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+            }
             label.setGraphic(view);
             label.setOnMouseClicked(e -> {
                 LogicEvents.getInstance().playCard(card);

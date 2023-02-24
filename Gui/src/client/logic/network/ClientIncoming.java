@@ -163,7 +163,7 @@ public class ClientIncoming {
     private void updatePlayedCards() {
         try {
             String[] playedCards = (String[]) in.readObject();
-            //TODO -> update played card panel
+            GuiController.getInstance().addPlayedCard(playedCards);
             //TODO -> update open game cards
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);

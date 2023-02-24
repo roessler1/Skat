@@ -59,7 +59,7 @@ public class Server extends Thread {
             try {
                 socket.close();
             } catch(IOException e) {
-                Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+                e.printStackTrace();
             }
         }
         sockets = null;
