@@ -111,6 +111,8 @@ public class LogicEvents {
         }
         GuiController.getInstance().loadWaiting();
         GuiController.getInstance().loadCardPane();
+        GuiController.getInstance().loadLeftPlayer();
+        GuiController.getInstance().getRightPlayer();
     }
 
     public void startServer() {

@@ -2,6 +2,7 @@ package client.gui.pane_controller;
 
 import client.gui.Gui;
 import client.gui.panes.CardPane;
+import client.gui.panes.OtherPlayersPane;
 import client.gui.panes.PlayedCardPane;
 import client.gui.panes.ServerSelectionPane;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,8 @@ public class GuiController {
     private Gui gui;
     private CardPane cardPane;
     private PlayedCardPane playedCardPane;
+    private OtherPlayersPane leftPlayer;
+    private OtherPlayersPane rightPlayer;
 
     private GuiController(Gui gui) {
         guiController = this;
@@ -105,6 +108,24 @@ public class GuiController {
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
+    }
+
+    public void loadRightPlayer() {
+        rightPlayer = new OtherPlayersPane(gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight(), false);
+        gui.getBorderPane().setRight(rightPlayer);
+    }
+
+    public OtherPlayersPane getRightPlayer() {
+        return rightPlayer;
+    }
+
+    public void loadLeftPlayer() {
+        leftPlayer = new OtherPlayersPane(gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight(), true);
+        gui.getBorderPane().setLeft(leftPlayer);
+    }
+
+    public OtherPlayersPane getLeftPlayer() {
+        return leftPlayer;
     }
 
     public static void loadGuiController(Gui gui) {

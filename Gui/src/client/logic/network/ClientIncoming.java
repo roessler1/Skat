@@ -171,6 +171,9 @@ public class ClientIncoming {
     private void updateHand() {
         try {
             cardLogic.addCardsToHand((ArrayList<Card>) in.readObject());
+            //TODO -> reset others cards
+            /*GuiController.getInstance().getRightPlayer().resetCards();
+            GuiController.getInstance().getLeftPlayer().resetCards();*/
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
