@@ -59,6 +59,16 @@ public class GuiController {
         cardPane.addCards(cardsUrls);
     }
 
+    public void loadSkatPane() {
+        gui.getBorderPane().setBottom(null);
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/skat-view.fxml"));
+        try {
+            gui.getBorderPane().setCenter(fxmlLoader.load());
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
     public void loadServerSelection() {
         gui.getBorderPane().setCenter(new ServerSelectionPane(gui.getBorderPane().getWidth(),
                 gui.getBorderPane().getHeight()));
@@ -93,5 +103,9 @@ public class GuiController {
 
     public static GuiController getInstance() {
         return guiController;
+    }
+
+    public Gui getGui() {
+        return gui;
     }
 }
