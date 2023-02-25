@@ -27,6 +27,7 @@ public class LogicEvents {
     private short bid;
     private Server server;
     private byte playerId;
+    private short[] playerPoints;
 
     private LogicEvents() {
         logicEvents = this;
@@ -164,5 +165,17 @@ public class LogicEvents {
 
     public void setSkatEvents(SkatEvents events) {
         cardLogic.setSkatEvents(events);
+    }
+
+    public byte getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerPoints(short[] playerPoints){
+        this.playerPoints = playerPoints;
+    }
+
+    public short[] getPlayerPoints() {
+        return playerPoints;
     }
 }

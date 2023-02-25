@@ -22,6 +22,7 @@ public class ClientIncoming {
     private ExecutorService executor;
     private boolean isUp;
     private CardLogic cardLogic;
+    private byte singlePlayer;
 
     public ClientIncoming(InputStream in, CardLogic cardLogic) {
         try {
@@ -132,8 +133,7 @@ public class ClientIncoming {
 
     private void updatePlayerPoints() {
         try {
-            short[] points = (short[]) in.readObject();
-            //TODO -> displaying points on results pane
+            LogicEvents.getInstance().setPlayerPoints((short[]) in.readObject());
             GuiController.getInstance().loadResults();
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
