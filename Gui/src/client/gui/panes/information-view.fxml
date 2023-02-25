@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<HBox alignment="TOP_LEFT" spacing="20.0" style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="client.gui.pane_events.InformationEvents">
+    <TableView fx:id="tableView" layoutX="35.0" layoutY="28.0" prefHeight="200" maxHeight="200" prefWidth="375" maxWidth="375">
+        <columns>
+            <TableColumn fx:id="soloPlayer" text="Einzelspieler" prefWidth="125"/>
+            <TableColumn fx:id="gameType" text="Spielart" prefWidth="125"/>
+            <TableColumn fx:id="winTier" text="Gewinnstufe" prefWidth="125"/>
+        </columns>
+    </TableView>
+</HBox>
