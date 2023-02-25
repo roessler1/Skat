@@ -2,6 +2,7 @@ package client.logic.logic;
 
 import client.gui.pane_controller.GuiController;
 import client.gui.pane_events.SkatEvents;
+import client.logic.LogicEvents;
 import skat.cards.Card;
 import client.logic.memory.Hand;
 import client.logic.memory.IHand;
@@ -66,7 +67,7 @@ public class CardLogic {
     }
 
     public void setGameId(byte gameId) {
-        //TODO -> displaying game
+        LogicEvents.getInstance().getInformation().setGameTypeColumn(gameId);
         hand.sortCards(gameId);
     }
 

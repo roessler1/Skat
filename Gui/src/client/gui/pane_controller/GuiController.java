@@ -27,9 +27,19 @@ public class GuiController {
 
     public void loadMainMenu() {
         gui.getBorderPane().setBottom(null);
-        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/information-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/main-menu-view.fxml"));
         try {
             gui.getBorderPane().setCenter(fxmlLoader.load());
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void loadInformation() {
+        gui.getBorderPane().setBottom(null);
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/information-view.fxml"));
+        try {
+            gui.getBorderPane().setTop(fxmlLoader.load());
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

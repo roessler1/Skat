@@ -1,6 +1,7 @@
 package client.logic;
 
 import client.gui.pane_controller.GuiController;
+import client.gui.pane_events.InformationEvents;
 import client.gui.pane_events.SkatEvents;
 import server.Server;
 import skat.log.Log;
@@ -28,6 +29,7 @@ public class LogicEvents {
     private Server server;
     private byte playerId;
     private short[] playerPoints;
+    private InformationEvents information;
 
     private LogicEvents() {
         logicEvents = this;
@@ -112,8 +114,7 @@ public class LogicEvents {
         }
         GuiController.getInstance().loadWaiting();
         GuiController.getInstance().loadCardPane();
-        GuiController.getInstance().loadLeftPlayer();
-        GuiController.getInstance().getRightPlayer();
+        GuiController.getInstance().loadInformation();
     }
 
     public void startServer() {
@@ -177,5 +178,13 @@ public class LogicEvents {
 
     public short[] getPlayerPoints() {
         return playerPoints;
+    }
+
+    public InformationEvents getInformation() {
+        return information;
+    }
+
+    public void setInformation(InformationEvents information) {
+        this.information = information;
     }
 }

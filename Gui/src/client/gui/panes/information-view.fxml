@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<HBox alignment="TOP_LEFT" spacing="20.0" style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<HBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
       fx:controller="client.gui.pane_events.InformationEvents">
-    <TableView fx:id="tableView" layoutX="35.0" layoutY="28.0" prefHeight="200" maxHeight="200" prefWidth="375" maxWidth="375">
-        <columns>
-            <TableColumn fx:id="soloPlayer" text="Einzelspieler" prefWidth="125"/>
-            <TableColumn fx:id="gameType" text="Spielart" prefWidth="125"/>
-            <TableColumn fx:id="winTier" text="Gewinnstufe" prefWidth="125"/>
-        </columns>
-    </TableView>
+    <GridPane alignment="TOP_CENTER" style="-fx-background-color: #b9b9b9; -fx-border-width: 5; -fx-padding: 5 5 5 5 " hgap="2" vgap="2">
+        <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
+               text="Einzelspieler" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
+              text="Spielart" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+        <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
+              text="Gewinnstufe" alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
+              fx:id="singlePlayer" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
+              fx:id="gameType" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
+              fx:id="winTier" alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+    </GridPane>
 </HBox>

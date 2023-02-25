@@ -84,7 +84,7 @@ public class ClientIncoming {
     private void updateSinglePlayerId() {
         try {
             byte singlePlayer = in.readByte();
-            //TODO -> displaying single player
+            LogicEvents.getInstance().getInformation().setSoloPlayerColumn(singlePlayer);
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -92,13 +92,8 @@ public class ClientIncoming {
 
     private void updatePriceStage() {
         try {
-            String msg = switch(in.readByte()) {
-                case 2 -> "Hand";
-                case 3 -> "Schneider";
-                case 4 -> "Schwarz";
-                case 5 -> "Ouvert";
-                default -> "";
-            };
+            byte profitLevel = in.readByte();
+            LogicEvents.getInstance().getInformation().setWinTierColumn(profitLevel);
             //TODO -> display game addition together with the game announcement
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
