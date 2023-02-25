@@ -94,7 +94,6 @@ public class ClientIncoming {
         try {
             byte profitLevel = in.readByte();
             LogicEvents.getInstance().getInformation().setWinTierColumn(profitLevel);
-            //TODO -> display game addition together with the game announcement
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -104,6 +103,7 @@ public class ClientIncoming {
         try {
             byte game = in.readByte();
             cardLogic.setGameId(game);
+            GuiController.getInstance().loadPlayedCards();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
