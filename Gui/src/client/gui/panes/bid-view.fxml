@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<HBox alignment="CENTER" spacing="115.0" style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="client.gui.pane_events.BidEvents">
+
+    <Button fx:id="bid" prefWidth="100" prefHeight="35"/>
+    <Button fx:id="pass" prefWidth="100" prefHeight="35"/>
+</HBox>
