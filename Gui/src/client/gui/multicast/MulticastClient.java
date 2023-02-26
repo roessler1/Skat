@@ -1,11 +1,12 @@
 package client.gui.multicast;
 
+import javafx.collections.FXCollections;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -13,7 +14,7 @@ public class MulticastClient implements IMulticastClient {
 
     protected MulticastSocket socket;
     protected byte[] buffer;
-    ListView<Label> serverAddresses;
+    final LinkedList<Label> serverAddresses;
     ExecutorService executor;
     Runnable runnable = this::run;
 
@@ -24,7 +25,7 @@ public class MulticastClient implements IMulticastClient {
             e.printStackTrace();
         }
         buffer = new byte[14];
-        serverAddresses = new ListView<>();
+        serverAddresses = new LinkedList<>();
         executor = Executors.newSingleThreadExecutor();
         executor.execute(runnable);
     }
@@ -40,7 +41,7 @@ public class MulticastClient implements IMulticastClient {
                 socket.receive(packet);
                 Label label = new Label(new String(packet.getData(), 0, packet.getLength()));
                 synchronized(serverAddresses) {
-                    serverAddresses.getItems().add(label);
+                    serverAddresses.add(label);
                 }
             }
             socket.leaveGroup(isa, nif);
@@ -52,8 +53,8 @@ public class MulticastClient implements IMulticastClient {
     @Override
     public SortedList<Label> getAvailableServers() {
         synchronized(serverAddresses) {
-            SortedList<Label> addresses = serverAddresses.getItems().sorted();
-            serverAddresses.getItems().clear();
+            SortedList<Label> addresses = FXCollections.observableList((LinkedList<Label>) serverAddresses.clone()).sorted();
+            serverAddresses.clear();
             return addresses;
         }
     }

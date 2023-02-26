@@ -4,6 +4,7 @@ import client.logic.LogicEvents;
 import client.gui.multicast.IMulticastClient;
 import client.gui.multicast.MulticastClient;
 import client.gui.pane_controller.GuiController;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -54,8 +55,8 @@ public class ServerSelectionPane extends StackPane {
     }
 
     private void update() {
-        addresses.getItems().clear();
-        addresses.getItems().addAll(client.getAvailableServers());
+        Platform.runLater(() -> addresses.getItems().clear());
+        Platform.runLater(() -> addresses.getItems().addAll(client.getAvailableServers()));
         for(Label label:addresses.getItems()) {
             label.setOnMouseClicked(e -> {
                 client.closeMulicastClient();
