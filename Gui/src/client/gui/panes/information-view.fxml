@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <HBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
       fx:controller="client.gui.pane_events.InformationEvents">
-    <GridPane alignment="TOP_CENTER" style="-fx-background-color: #b9b9b9; -fx-border-width: 5; -fx-padding: 5 5 5 5 " hgap="2" vgap="2">
+    <GridPane style="-fx-background-color: #b9b9b9; -fx-border-width: 5; -fx-padding: 5 5 5 5 " hgap="2" vgap="2">
         <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
                text="Einzelspieler" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
         <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"

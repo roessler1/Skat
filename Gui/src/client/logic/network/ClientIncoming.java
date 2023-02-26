@@ -137,8 +137,7 @@ public class ClientIncoming {
 
     private void updateOpenGameCards() {
         try {
-            String[] openCards = (String[]) in.readObject();
-            //TODO -> create open game cards panel
+            GuiController.getInstance().loadOpenGameCards((String[]) in.readObject());
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -157,7 +156,6 @@ public class ClientIncoming {
         try {
             String[] playedCards = (String[]) in.readObject();
             GuiController.getInstance().addPlayedCard(playedCards);
-            //TODO -> update open game cards
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -166,9 +164,6 @@ public class ClientIncoming {
     private void updateHand() {
         try {
             cardLogic.addCardsToHand((ArrayList<Card>) in.readObject());
-            //TODO -> reset others cards
-            /*GuiController.getInstance().getRightPlayer().resetCards();
-            GuiController.getInstance().getLeftPlayer().resetCards();*/
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

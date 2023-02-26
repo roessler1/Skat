@@ -2,7 +2,7 @@ package client.gui.pane_controller;
 
 import client.gui.Gui;
 import client.gui.panes.CardPane;
-import client.gui.panes.OtherPlayersPane;
+import client.gui.panes.OpenCardsPane;
 import client.gui.panes.PlayedCardPane;
 import client.gui.panes.ServerSelectionPane;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +17,7 @@ public class GuiController {
     private Gui gui;
     private CardPane cardPane;
     private PlayedCardPane playedCardPane;
-    private OtherPlayersPane leftPlayer;
-    private OtherPlayersPane rightPlayer;
+    private OpenCardsPane openCards;
 
     private GuiController(Gui gui) {
         guiController = this;
@@ -52,6 +51,7 @@ public class GuiController {
 
     public void addPlayedCard(String[] cards) {
         playedCardPane.addPlayedCards(cards);
+        removeOpenCard(cards);
     }
 
     public void loadGameSelection() {
@@ -65,7 +65,10 @@ public class GuiController {
     }
 
     public void loadResults() {
-        gui.getBorderPane().setBottom(null);
+        if(openCards != null) {
+            gui.getBorderPane().setRight(null);
+            openCards = null;
+        }
         FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/results-view.fxml"));
         try {
             gui.getBorderPane().setCenter(fxmlLoader.load());
@@ -120,22 +123,15 @@ public class GuiController {
         }
     }
 
-    public void loadRightPlayer() {
-        rightPlayer = new OtherPlayersPane(gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight(), false);
-        gui.getBorderPane().setRight(rightPlayer);
+    public void loadOpenGameCards(String[] urls) {
+        openCards = new OpenCardsPane(urls, gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight());
+        gui.getBorderPane().setRight(openCards);
     }
 
-    public OtherPlayersPane getRightPlayer() {
-        return rightPlayer;
-    }
-
-    public void loadLeftPlayer() {
-        leftPlayer = new OtherPlayersPane(gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight(), true);
-        gui.getBorderPane().setLeft(leftPlayer);
-    }
-
-    public OtherPlayersPane getLeftPlayer() {
-        return leftPlayer;
+    private void removeOpenCard(String[] playedCards) {
+        if(openCards != null) {
+            openCards.removeCard(playedCards);
+        }
     }
 
     public static void loadGuiController(Gui gui) {
