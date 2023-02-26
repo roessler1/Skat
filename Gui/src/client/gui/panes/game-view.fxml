@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.StackPane?>
+
+<?import javafx.scene.layout.VBox?>
+<StackPane style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
+           fx:controller="client.gui.pane_events.GameEvents">
+      <VBox alignment="TOP_RIGHT" spacing="10" style="-fx-background-color: #b9b9b9; -fx-padding: 5 5 10 5;" maxWidth="700" maxHeight="400">
+            <HBox alignment="CENTER" style="-fx-background-color: #ffffff" spacing="30.0" prefWidth="700" prefHeight="355">
+
+                  <RadioButton selected="true" fx:id="12" text="Eichel">
+                        <toggleGroup>
+                              <ToggleGroup fx:id="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="11" text="Blatt">
+                        <toggleGroup>
+                              <fx:reference source="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="10" text="Herz">
+                        <toggleGroup>
+                              <fx:reference source="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="9" text="Schellen">
+                        <toggleGroup>
+                              <fx:reference source="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="24" text="Grand">
+                        <toggleGroup>
+                              <fx:reference source="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="twentythree" text="Nullspiel">
+                        <toggleGroup>
+                              <fx:reference source="gameId"/>
+                        </toggleGroup>
+                  </RadioButton>
+            </HBox>
+            <HBox alignment="CENTER" style="-fx-background-color: #ffffff" spacing="30.0" prefWidth="700" prefHeight="355">
+
+                  <RadioButton selected="true" fx:id="normal">
+                        <toggleGroup>
+                              <ToggleGroup fx:id="priceStaging"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="three" text="Schneider angesagt">
+                        <toggleGroup>
+                              <fx:reference source="priceStaging"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="four" text="Schwarz angesagt">
+                        <toggleGroup>
+                              <fx:reference source="priceStaging"/>
+                        </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="five"  text="Ouvert">
+                        <toggleGroup>
+                              <fx:reference source="priceStaging"/>
+                        </toggleGroup>
+                  </RadioButton>
+
+            </HBox>
+            <Button text="Bestätigen" onAction="#onConfirmButtonClicked" prefWidth="80" prefHeight="35"/>
+      </VBox>
+</StackPane>

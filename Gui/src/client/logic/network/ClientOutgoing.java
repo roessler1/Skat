@@ -91,7 +91,6 @@ public class ClientOutgoing {
         try {
             out.writeByte(7);
             out.flush();
-            out.close();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

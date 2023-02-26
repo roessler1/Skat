@@ -1,5 +1,8 @@
 package client.logic.logic;
 
+import client.gui.pane_controller.GuiController;
+import client.gui.pane_events.SkatEvents;
+import client.logic.LogicEvents;
 import skat.cards.Card;
 import client.logic.memory.Hand;
 import client.logic.memory.IHand;
@@ -9,11 +12,14 @@ import java.util.Arrays;
 
 public class CardLogic {
 
-    private IHand hand;
+    private final IHand hand;
     private Card[] skat;
+    private boolean handGame;
+    private SkatEvents skatEvents;
 
     public CardLogic() {
         hand = new Hand();
+        handGame = true;
     }
 
     public String[] getOpenGameCards() {
@@ -22,9 +28,10 @@ public class CardLogic {
 
     public void insertSkat() {
         addCardsToHand(new ArrayList<>(Arrays.asList(skat)));
+        handGame = false;
         for(byte i = 0; i < skat.length; i++)
             skat[i] = null;
-        //TODO -> update skat panel
+        GuiController.getInstance().loadSkatPane();
     }
 
     public Card[] getSkat() {
@@ -33,17 +40,16 @@ public class CardLogic {
 
     public void setSkat(Card[] skat) {
         this.skat = skat;
-        //TODO -> create skat panel
     }
 
     public void putToSkat(String cardUrl) {
         if(skat[0] == null) {
             skat[0] = hand.removeByUrl(cardUrl);
-            //TODO -> update graphic
+            skatEvents.pushCard(skat[0].getUrl());
         }
         if(skat[1] == null) {
             skat[1] = hand.removeByUrl(cardUrl);
-            //TODO -> update graphic
+            skatEvents.pushCard(skat[1].getUrl());
         }
     }
 
@@ -57,11 +63,24 @@ public class CardLogic {
 
     public void addCardsToHand(ArrayList<Card> cards) {
         hand.addCards(cards);
-        //TODO -> update Graphic
+        GuiController.getInstance().addCards(hand.getCardsUrls());
     }
 
     public void setGameId(byte gameId) {
-        //TODO -> displaying game
+        LogicEvents.getInstance().getInformation().setGameTypeColumn(gameId);
         hand.sortCards(gameId);
+    }
+
+    public boolean hasSkat() {
+        return skat != null;
+    }
+
+    public boolean isHandGame() {
+        boolean handGame = this.handGame;
+        this.handGame = true;
+        return handGame;
+    }
+    public void setSkatEvents(SkatEvents events) {
+        skatEvents = events;
     }
 }

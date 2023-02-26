@@ -22,6 +22,7 @@ public class ClientIncoming {
     private ExecutorService executor;
     private boolean isUp;
     private CardLogic cardLogic;
+    private byte singlePlayer;
 
     public ClientIncoming(InputStream in, CardLogic cardLogic) {
         try {
@@ -41,8 +42,10 @@ public class ClientIncoming {
     private void update() {
         do {
             try {
-                byte input = in.readByte();
-                resolveUpdate(input);
+                if(in.available() > 0) {
+                    byte input = in.readByte();
+                    resolveUpdate(input);
+                }
             } catch(IOException e) {
                 Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
             }
@@ -81,7 +84,7 @@ public class ClientIncoming {
     private void updateSinglePlayerId() {
         try {
             byte singlePlayer = in.readByte();
-            //TODO -> displaying single player
+            LogicEvents.getInstance().getInformation().setSoloPlayerColumn(singlePlayer);
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -89,14 +92,8 @@ public class ClientIncoming {
 
     private void updatePriceStage() {
         try {
-            String msg = switch(in.readByte()) {
-                case 2 -> "Hand";
-                case 3 -> "Schneider";
-                case 4 -> "Schwarz";
-                case 5 -> "Ouvert";
-                default -> "";
-            };
-            //TODO -> display game addition together with the game announcement
+            byte profitLevel = in.readByte();
+            LogicEvents.getInstance().getInformation().setWinTierColumn(profitLevel);
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -106,7 +103,7 @@ public class ClientIncoming {
         try {
             byte game = in.readByte();
             cardLogic.setGameId(game);
-            //TODO -> announce game
+            GuiController.getInstance().loadPlayedCards();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -123,8 +120,7 @@ public class ClientIncoming {
 
     private void updateId() {
         try {
-            byte id = in.readByte();
-            //TODO -> set own id
+            LogicEvents.getInstance().setPlayerId(in.readByte());
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -132,8 +128,8 @@ public class ClientIncoming {
 
     private void updatePlayerPoints() {
         try {
-            short[] points = (short[]) in.readObject();
-            //TODO -> open result panel
+            LogicEvents.getInstance().setPlayerPoints((short[]) in.readObject());
+            GuiController.getInstance().loadResults();
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -141,8 +137,7 @@ public class ClientIncoming {
 
     private void updateOpenGameCards() {
         try {
-            String[] openCards = (String[]) in.readObject();
-            //TODO -> create open game cards panel
+            GuiController.getInstance().loadOpenGameCards((String[]) in.readObject());
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -151,7 +146,7 @@ public class ClientIncoming {
     private void updateSkat() {
         try {
             cardLogic.setSkat((Card[]) in.readObject());
-            //TODO -> create skat panel
+            GuiController.getInstance().loadBidPanel();
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -160,8 +155,7 @@ public class ClientIncoming {
     private void updatePlayedCards() {
         try {
             String[] playedCards = (String[]) in.readObject();
-            //TODO -> update played card panel
-            //TODO -> update open game cards
+            GuiController.getInstance().addPlayedCard(playedCards);
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -176,15 +170,9 @@ public class ClientIncoming {
     }
 
     public void closeInput() {
-        try {
-            isUp = false;
-            in.close();
-            cardLogic = null;
-            LogicEvents.getInstance().closeConnection();
-            //TODO -> create main menu panel
-        } catch(IOException e) {
-            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
-        }
+        isUp = false;
+        cardLogic = null;
+        LogicEvents.getInstance().closeConnection();
     }
 
     public boolean isUp() {

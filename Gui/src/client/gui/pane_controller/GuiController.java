@@ -1,6 +1,9 @@
 package client.gui.pane_controller;
 
 import client.gui.Gui;
+import client.gui.panes.CardPane;
+import client.gui.panes.OpenCardsPane;
+import client.gui.panes.PlayedCardPane;
 import client.gui.panes.ServerSelectionPane;
 import javafx.fxml.FXMLLoader;
 import skat.log.Log;
@@ -12,6 +15,9 @@ public class GuiController {
 
     private static GuiController guiController;
     private Gui gui;
+    private CardPane cardPane;
+    private PlayedCardPane playedCardPane;
+    private OpenCardsPane openCards;
 
     private GuiController(Gui gui) {
         guiController = this;
@@ -19,7 +25,70 @@ public class GuiController {
     }
 
     public void loadMainMenu() {
-        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/gui/panes/main-menu-view.fxml"));
+        gui.getBorderPane().setBottom(null);
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/main-menu-view.fxml"));
+        try {
+            gui.getBorderPane().setCenter(fxmlLoader.load());
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void loadInformation() {
+        gui.getBorderPane().setBottom(null);
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/information-view.fxml"));
+        try {
+            gui.getBorderPane().setTop(fxmlLoader.load());
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void loadPlayedCards() {
+        playedCardPane = new PlayedCardPane(gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight());
+        gui.getBorderPane().setCenter(playedCardPane);
+    }
+
+    public void addPlayedCard(String[] cards) {
+        playedCardPane.addPlayedCards(cards);
+        removeOpenCard(cards);
+    }
+
+    public void loadGameSelection() {
+        gui.getBorderPane().setBottom(null);
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/game-view.fxml"));
+        try {
+            gui.getBorderPane().setCenter(fxmlLoader.load());
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void loadResults() {
+        if(openCards != null) {
+            gui.getBorderPane().setRight(null);
+            openCards = null;
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/results-view.fxml"));
+        try {
+            gui.getBorderPane().setCenter(fxmlLoader.load());
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void loadCardPane() {
+        cardPane = new CardPane(gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight());
+        gui.getBorderPane().setBottom(cardPane);
+    }
+
+    public void addCards(String[] cardsUrls) {
+        cardPane.addCards(cardsUrls);
+    }
+
+    public void loadSkatPane() {
+        gui.getBorderPane().setBottom(null);
+        FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/skat-view.fxml"));
         try {
             gui.getBorderPane().setCenter(fxmlLoader.load());
         } catch(IOException e) {
@@ -32,12 +101,36 @@ public class GuiController {
                 gui.getBorderPane().getHeight()));
     }
 
+    public void unloadCenterPane() {
+        gui.getBorderPane().setCenter(null);
+    }
+
     public void loadBidPanel() {
-        FXMLLoader loader = new FXMLLoader(Gui.class.getResource("/gui/panes/bid-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/bid-view.fxml"));
         try {
             gui.getBorderPane().setCenter(loader.load());
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void loadWaiting() {
+        FXMLLoader loader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/waiting-view.fxml"));
+        try {
+            gui.getBorderPane().setCenter(loader.load());
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
+    public void loadOpenGameCards(String[] urls) {
+        openCards = new OpenCardsPane(urls, gui.getBorderPane().getWidth(), gui.getBorderPane().getHeight());
+        gui.getBorderPane().setRight(openCards);
+    }
+
+    private void removeOpenCard(String[] playedCards) {
+        if(openCards != null) {
+            openCards.removeCard(playedCards);
         }
     }
 
@@ -48,5 +141,9 @@ public class GuiController {
 
     public static GuiController getInstance() {
         return guiController;
+    }
+
+    public Gui getGui() {
+        return gui;
     }
 }

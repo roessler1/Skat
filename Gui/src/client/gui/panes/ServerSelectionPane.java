@@ -62,7 +62,6 @@ public class ServerSelectionPane extends StackPane {
                 executorService.shutdownNow();
                 executorService.close();
                 LogicEvents.getInstance().buildConnection(label.getText());
-                //TODO -> change pane
             });
         }
     }

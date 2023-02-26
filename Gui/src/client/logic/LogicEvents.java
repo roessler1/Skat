@@ -1,5 +1,8 @@
 package client.logic;
 
+import client.gui.pane_controller.GuiController;
+import client.gui.pane_events.InformationEvents;
+import client.gui.pane_events.SkatEvents;
 import server.Server;
 import skat.log.Log;
 import client.logic.logic.CardLogic;
@@ -8,6 +11,7 @@ import client.logic.network.ClientOutgoing;
 
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
@@ -23,10 +27,19 @@ public class LogicEvents {
     private boolean turn;
     private short bid;
     private Server server;
+    private byte playerId;
+    private short[] playerPoints;
+    private InformationEvents information;
 
     private LogicEvents() {
         logicEvents = this;
         cardLogic = new CardLogic();
+        socket = new Socket();
+        try {
+            socket.setReuseAddress(true);
+        } catch(IOException e) {
+            Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
     public static LogicEvents getInstance() {
@@ -59,6 +72,7 @@ public class LogicEvents {
     public void sendSkat() {
         if(cardLogic.getHandSize() == 10) {
             outgoing.sendSkat(cardLogic.getSkat());
+            GuiController.getInstance().loadGameSelection();
         }
     }
 
@@ -77,18 +91,18 @@ public class LogicEvents {
             incoming.closeInput();
         } else {
             outgoing.closeOutput();
-            try {
-                socket.close();
-            } catch(IOException e) {
-                Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
+            if(server != null) {
+                server.closeServer();
+                server = null;
             }
+            GuiController.getInstance().loadMainMenu();
         }
 
     }
 
     public void buildConnection(String address) {
         try {
-            socket = new Socket(address, 18081);
+            socket.connect(new InetSocketAddress(address, 18081));
             outgoing = new ClientOutgoing(socket.getOutputStream());
             incoming = new ClientIncoming(socket.getInputStream(), cardLogic);
         } catch(IOException e) {
@@ -98,8 +112,9 @@ public class LogicEvents {
         if(errorOccurred) {
             return;
         }
-        //TODO -> close selection panel
-        //TODO -> open card panel
+        GuiController.getInstance().loadWaiting();
+        GuiController.getInstance().loadCardPane();
+        GuiController.getInstance().loadInformation();
     }
 
     public void startServer() {
@@ -135,5 +150,41 @@ public class LogicEvents {
     public static void deleteInstance() {
         logicEvents.closeConnection();
         logicEvents = null;
+    }
+
+    public boolean isBiddingOver() {
+        return cardLogic.hasSkat();
+    }
+
+    public boolean isHandGame() {
+        return cardLogic.isHandGame();
+    }
+
+    public void setPlayerId(byte playerId) {
+        this.playerId = playerId;
+    }
+
+    public void setSkatEvents(SkatEvents events) {
+        cardLogic.setSkatEvents(events);
+    }
+
+    public byte getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerPoints(short[] playerPoints){
+        this.playerPoints = playerPoints;
+    }
+
+    public short[] getPlayerPoints() {
+        return playerPoints;
+    }
+
+    public InformationEvents getInformation() {
+        return information;
+    }
+
+    public void setInformation(InformationEvents information) {
+        this.information = information;
     }
 }
