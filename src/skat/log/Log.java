@@ -11,7 +11,7 @@ import java.util.logging.*;
 
 public class Log {
 
-    final static Level level = Level.OFF;
+    final static Level level = Level.SEVERE;
     static Logger logger = null;
     Handler fileHandler;
     SimpleFormatter plainText;
