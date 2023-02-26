@@ -14,7 +14,7 @@ import java.util.logging.Level;
 public class GuiController {
 
     private static GuiController guiController;
-    private Gui gui;
+    private final Gui gui;
     private CardPane cardPane;
     private PlayedCardPane playedCardPane;
     private OpenCardsPane openCards;
@@ -26,6 +26,8 @@ public class GuiController {
 
     public void loadMainMenu() {
         gui.getBorderPane().setBottom(null);
+        gui.getBorderPane().setRight(null);
+        gui.getBorderPane().setTop(null);
         FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/main-menu-view.fxml"));
         try {
             gui.getBorderPane().setCenter(fxmlLoader.load());
