@@ -1,13 +1,14 @@
 package client.gui.multicast;
 
-import javafx.collections.transformation.SortedList;
 import javafx.scene.control.Label;
+
+import java.util.LinkedList;
 
 public interface IMulticastClient {
 
     void run();
 
-    SortedList<Label> getAvailableServers();
+    LinkedList<Label> getAvailableServers();
 
     void closeMulicastClient();
 }

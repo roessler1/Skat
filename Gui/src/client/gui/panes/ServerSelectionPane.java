@@ -5,6 +5,7 @@ import client.gui.multicast.IMulticastClient;
 import client.gui.multicast.MulticastClient;
 import client.gui.pane_controller.GuiController;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
+import java.util.LinkedList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -56,8 +58,8 @@ public class ServerSelectionPane extends StackPane {
 
     private void update() {
         Platform.runLater(() -> addresses.getItems().clear());
-        Platform.runLater(() -> addresses.getItems().addAll(client.getAvailableServers()));
-        for(Label label:addresses.getItems()) {
+        LinkedList<Label> list = client.getAvailableServers();
+        for(Label label:list) {
             label.setOnMouseClicked(e -> {
                 client.closeMulicastClient();
                 executorService.shutdownNow();
@@ -65,5 +67,6 @@ public class ServerSelectionPane extends StackPane {
                 LogicEvents.getInstance().buildConnection(label.getText());
             });
         }
+        Platform.runLater(() -> addresses.getItems().addAll(FXCollections.observableList(list).sorted()));
     }
 }

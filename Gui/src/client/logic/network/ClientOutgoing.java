@@ -17,6 +17,7 @@ public class ClientOutgoing {
     public ClientOutgoing(OutputStream out) {
         try {
             this.out = new ObjectOutputStream(new BufferedOutputStream(out));
+            this.out.flush();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
             LogicEvents.getInstance().setErrorOccurred();

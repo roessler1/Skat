@@ -1,7 +1,5 @@
 package client.gui.multicast;
 
-import javafx.collections.FXCollections;
-import javafx.collections.transformation.SortedList;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
@@ -52,9 +50,9 @@ public class MulticastClient implements IMulticastClient {
     }
 
     @Override
-    public SortedList<Label> getAvailableServers() {
+    public LinkedList<Label> getAvailableServers() {
         synchronized(serverAddresses) {
-            SortedList<Label> addresses = FXCollections.observableList((LinkedList<Label>) serverAddresses.clone()).sorted();
+            LinkedList<Label> addresses = (LinkedList<Label>) serverAddresses.clone();
             serverAddresses.clear();
             return addresses;
         }
