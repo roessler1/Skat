@@ -1,5 +1,6 @@
 package client.gui.pane_events;
 
+import client.gui.pane_controller.GuiController;
 import client.logic.LogicEvents;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,11 +20,13 @@ public class BidEvents implements Initializable {
     @FXML
     protected void onBidButtonClicked() {
         LogicEvents.getInstance().sendBidAnswer(true);
+        GuiController.getInstance().unloadCenterPane();
     }
 
     @FXML
     protected void onPassButtonClicked() {
         LogicEvents.getInstance().sendBidAnswer(false);
+        GuiController.getInstance().unloadCenterPane();
     }
 
     @FXML

@@ -63,6 +63,8 @@ public class BidPartLogic {
                 server.getClient(listening).sendBid(currentBid);
             else
                 logic.setSinglePlayer(biddingPlayers.get(0));
+        } else {
+            server.getClient(giving).sendBid(currentBid);
         }
     }
 

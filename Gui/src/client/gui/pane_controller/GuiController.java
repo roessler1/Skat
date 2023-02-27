@@ -41,7 +41,6 @@ public class GuiController {
 
     public void loadInformation() {
         Platform.runLater(() -> {
-            gui.getBorderPane().setBottom(null);
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/information-view.fxml"));
             try {
                 gui.getBorderPane().setTop(fxmlLoader.load());
@@ -105,7 +104,6 @@ public class GuiController {
 
     public void loadSkatPane() {
         Platform.runLater(() -> {
-            gui.getBorderPane().setBottom(null);
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/skat-view.fxml"));
             try {
                 gui.getBorderPane().setCenter(fxmlLoader.load());
