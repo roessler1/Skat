@@ -64,6 +64,7 @@ public class CardLogic {
     public void addCardsToHand(ArrayList<Card> cards) {
         hand.addCards(cards);
         GuiController.getInstance().addCards(hand.getCardsUrls());
+        GuiController.getInstance().unloadCenterPane();
     }
 
     public void setGameId(byte gameId) {
