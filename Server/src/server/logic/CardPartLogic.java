@@ -13,12 +13,15 @@ public class CardPartLogic {
     private ArrayList<Card>[] hands;
     private Card[] playedCards;
     private Card[] skat;
-    private Random random;
+    private final Random random;
     private byte gameId;
 
     protected CardPartLogic() {
         cards = new ArrayList<>();
         hands = new ArrayList[3];
+        hands[0] = new ArrayList<>();
+        hands[1] = new ArrayList<>();
+        hands[2] = new ArrayList<>();
         playedCards = new Card[3];
         skat = new Card[2];
         random = new Random();
