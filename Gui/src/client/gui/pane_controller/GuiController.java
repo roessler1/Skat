@@ -66,7 +66,6 @@ public class GuiController {
 
     public void loadGameSelection() {
         Platform.runLater(() -> {
-            gui.getBorderPane().setBottom(null);
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/game-view.fxml"));
             try {
                 gui.getBorderPane().setCenter(fxmlLoader.load());
