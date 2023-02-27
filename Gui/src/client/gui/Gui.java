@@ -17,8 +17,8 @@ public class Gui extends Application {
     public void start(Stage primaryStage) throws Exception {
         GuiController.loadGuiController(this);
         borderPane = new BorderPane();
+        borderPane.setStyle("-fx-background-color: #349746");
         Scene scene = new Scene(borderPane);
-        scene.setFill(Color.rgb(52, 151, 70));
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Skat");
         this.primaryStage.setFullScreen(true);

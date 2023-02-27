@@ -52,7 +52,7 @@ public class CardPane extends HBox {
                 labels.remove(label);
             });
             labels.add(label);
-            Platform.runLater(() -> this.getChildren().add(label));
+            this.getChildren().add(label);
         }
     }
 }
