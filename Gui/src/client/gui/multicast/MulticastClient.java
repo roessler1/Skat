@@ -17,8 +17,10 @@ public class MulticastClient implements IMulticastClient {
     final LinkedList<Label> serverAddresses;
     ExecutorService executor;
     Runnable runnable = this::run;
+    private boolean open;
 
     public MulticastClient() {
+        open = true;
         try {
             socket = new MulticastSocket(18081);
         } catch(IOException e) {
@@ -37,12 +39,11 @@ public class MulticastClient implements IMulticastClient {
             InetSocketAddress isa = new InetSocketAddress("230.0.0.1", 18081);
             socket.joinGroup(isa, nif);
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-            while(socket.isConnected()) {
+            while(open) {
                 socket.receive(packet);
-                Label label = new Label(new String(packet.getData(), 0, packet.getLength()));
-                synchronized(serverAddresses) {
-                    serverAddresses.add(label);
-                }
+                Label label = new Label();
+                label.setText(new String(packet.getData(), 0, packet.getLength()));
+                serverAddresses.add(label);
             }
             socket.leaveGroup(isa, nif);
         } catch(IOException e) {
@@ -61,6 +62,7 @@ public class MulticastClient implements IMulticastClient {
 
     @Override
     public void closeMulicastClient() {
+        open = false;
         socket.close();
     }
 }
