@@ -3,6 +3,7 @@ package client.gui.panes;
 import client.gui.Gui;
 import client.logic.LogicEvents;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,7 +22,7 @@ public class CardPane extends HBox {
 
     public CardPane(double screenWidth, double screenHeight) {
         width = 190*(screenWidth*100/1920)/100;
-        height = (294*(screenHeight*100/1080)/100)/2;
+        height = 294*(screenHeight*100/1080)/100;
         this.setAlignment(Pos.CENTER);
         this.setStyle("-fx-background-color: #349746");
         this.setSpacing(-(width/2));
@@ -32,12 +33,15 @@ public class CardPane extends HBox {
     public void addCards(String[] cardsUrls) {
         labels.clear();
         this.getChildren().clear();
-        Label label = new Label();
         for(String card:cardsUrls) {
+            Label label = new Label();
             label.setAlignment(Pos.TOP_LEFT);
             ImageView view = null;
             try {
-                view = new ImageView(new Image(Gui.class.getResource(card).openStream(), width, height, true, false));
+                Image img = new Image(Gui.class.getResource(card).openStream(), width, height, true, false);
+                view = new ImageView(img);
+                Rectangle2D rec = new Rectangle2D(0,0,width,(height/3*2));
+                view.setViewport(rec);
             } catch(IOException e) {
                 Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
             }
