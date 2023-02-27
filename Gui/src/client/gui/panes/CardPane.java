@@ -2,7 +2,6 @@ package client.gui.panes;
 
 import client.gui.Gui;
 import client.logic.LogicEvents;
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
@@ -48,8 +47,9 @@ public class CardPane extends HBox {
             }
             label.setGraphic(view);
             label.setOnMouseClicked(e -> {
-                LogicEvents.getInstance().playCard(card);
                 labels.remove(label);
+                this.getChildren().remove(label);
+                LogicEvents.getInstance().playCard(card);
             });
             labels.add(label);
             this.getChildren().add(label);

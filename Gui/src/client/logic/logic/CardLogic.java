@@ -47,10 +47,11 @@ public class CardLogic {
             skat[0] = hand.removeByUrl(cardUrl);
             skatEvents.pushCard(skat[0].getUrl());
         }
-        if(skat[1] == null) {
+        else if(skat[1] == null) {
             skat[1] = hand.removeByUrl(cardUrl);
             skatEvents.pushCard(skat[1].getUrl());
         }
+        else addCardsToHand(hand.getCards());
     }
 
     public int getHandSize() {

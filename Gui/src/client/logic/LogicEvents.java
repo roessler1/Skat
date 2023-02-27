@@ -19,11 +19,11 @@ import java.util.logging.Level;
 public class LogicEvents {
 
     static LogicEvents logicEvents;
-    private Socket socket;
+    private final Socket socket;
     private boolean errorOccurred;
     private ClientIncoming incoming;
     private ClientOutgoing outgoing;
-    private CardLogic cardLogic;
+    private final CardLogic cardLogic;
     private boolean turn;
     private short bid;
     private Server server;
@@ -79,6 +79,7 @@ public class LogicEvents {
     public void playCard(String cardUrl) {
         if(cardLogic.getHandSize() > 10) {
             cardLogic.putToSkat(cardUrl);
+            return;
         }
         if(!turn)
             return;
