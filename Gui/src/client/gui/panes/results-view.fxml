@@ -8,8 +8,8 @@
 <?import javafx.scene.control.Label?>
 <StackPane style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
            fx:controller="client.gui.pane_events.ResultsEvents">
-    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #b9b9b9; -fx-padding: 5 5 10 5;" maxWidth="700" maxHeight="400">
-        <VBox style="-fx-background-color: #ffffff; -fx-padding: 5 20 5 5;">
+    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #b9b9b9; -fx-padding: 5 5 10 5;" maxWidth="500" maxHeight="400">
+        <VBox prefHeight="390" style="-fx-background-color: #ffffff; -fx-padding: 5 20 5 5;">
             <HBox alignment="CENTER_LEFT">
                 <Text style="-fx-font-size: 14.0" fx:id="player1"/>
                 <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff" fx:id="player1Points"/>
