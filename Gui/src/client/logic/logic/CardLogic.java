@@ -7,9 +7,6 @@ import skat.cards.Card;
 import client.logic.memory.Hand;
 import client.logic.memory.IHand;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class CardLogic {
 
     private final IHand hand;
@@ -27,7 +24,7 @@ public class CardLogic {
     }
 
     public void insertSkat() {
-        addCardsToHand(new ArrayList<>(Arrays.asList(skat)));
+        addCardsToHand(skat);
         handGame = false;
         for(byte i = 0; i < skat.length; i++)
             skat[i] = null;
@@ -62,7 +59,7 @@ public class CardLogic {
         return hand.getCard(cardUrl);
     }
 
-    public void addCardsToHand(ArrayList<Card> cards) {
+    public void addCardsToHand(Card[] cards) {
         hand.addCards(cards);
         GuiController.getInstance().addCards(hand.getCardsUrls());
         GuiController.getInstance().unloadCenterPane();

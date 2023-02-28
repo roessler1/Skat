@@ -4,6 +4,7 @@ import skat.cards.Card;
 import skat.compare.CardSort;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Hand implements IHand {
 
@@ -16,8 +17,8 @@ public class Hand implements IHand {
     }
 
     @Override
-    public void addCards(ArrayList<Card> cards) {
-        hand.addAll(cards);
+    public void addCards(Card[] cards) {
+        hand.addAll(Arrays.asList(cards));
         hand = sort.sort(hand, (byte) 24);
     }
 
@@ -32,8 +33,8 @@ public class Hand implements IHand {
     }
 
     @Override
-    public ArrayList<Card> getCards() {
-        return hand;
+    public Card[] getCards() {
+        return (Card[]) hand.toArray();
     }
 
     @Override

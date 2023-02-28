@@ -10,8 +10,6 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -73,7 +71,7 @@ public class ClientIncoming {
     private void retryPlayCard() {
         try {
             Card card = (Card) in.readObject();
-            cardLogic.addCardsToHand(new ArrayList<>(Arrays.asList(card)));
+            cardLogic.addCardsToHand(new Card[]{card});
             cardLogic.setGameId(in.readByte());
             LogicEvents.getInstance().setTurn();
         } catch(IOException | ClassNotFoundException e) {
@@ -164,7 +162,7 @@ public class ClientIncoming {
 
     private void updateHand() {
         try {
-            cardLogic.addCardsToHand((ArrayList<Card>) in.readObject());
+            cardLogic.addCardsToHand((Card[]) in.readObject());
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

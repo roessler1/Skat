@@ -119,8 +119,8 @@ public class CardPartLogic {
         return playedCards;
     }
 
-    protected ArrayList<Card> getHand(byte playerId) {
-        return hands[playerId];
+    protected Card[] getHand(byte playerId) {
+        return (Card[]) hands[playerId].toArray();
     }
 
     protected boolean isPlayedCardsFull() {

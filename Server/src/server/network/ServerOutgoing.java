@@ -7,7 +7,6 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class ServerOutgoing {
@@ -136,7 +135,7 @@ public class ServerOutgoing {
         }
     }
 
-    public void sendHand(ArrayList<Card> hand) {
+    public void sendHand(Card[] hand) {
         try {
             out.writeByte(1);
             out.flush();
