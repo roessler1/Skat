@@ -154,7 +154,10 @@ public class ServerOutgoing {
     public void sendPlayedCards(Card[] playedCards) {
         String[] cards = new String[playedCards.length];
         for(byte i = 0; i < cards.length; i++) {
-            cards[i] = playedCards[i].getUrl();
+            if(playedCards[i] != null)
+                cards[i] = playedCards[i].getUrl();
+            else
+                cards[i] = "";
         }
         try {
             out.writeByte(2);
