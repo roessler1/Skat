@@ -54,8 +54,11 @@ public class ResultsEvents implements Initializable {
             player3.setText("Du\t\t");
         }
         short[] playerPoints = LogicEvents.getInstance().getPlayerPoints();
-        player1Points.setText(String.valueOf(playerPoints[0]));
-        player1Points.setText(String.valueOf(playerPoints[1]));
-        player1Points.setText(String.valueOf(playerPoints[2]));
+        String points1 = String.valueOf(playerPoints[0]);
+        String points2 = String.valueOf(playerPoints[1]);
+        String points3 = String.valueOf(playerPoints[2]);
+        player1Points.setText(points1);
+        player1Points.setText(points2);
+        player1Points.setText(points3);
     }
 }

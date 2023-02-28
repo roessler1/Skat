@@ -29,7 +29,7 @@ public class ServerLogic {
             server.getClient((byte) 0).sendPlayedCards(cardLogic.getPlayedCards());
             server.getClient((byte) 1).sendPlayedCards(cardLogic.getPlayedCards());
             server.getClient((byte) 2).sendPlayedCards(cardLogic.getPlayedCards());
-            if(card.getColor() == pointsLogic.getGameId() || card.getValue() == 2)
+            if((card.getColor() == pointsLogic.getGameId() || card.getValue() == 2) && playerId == singlePlayer)
                 pointsLogic.addPeak(card);
             if(cardLogic.isPlayedCardsFull()) {
                 calculatePoints();
