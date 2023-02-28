@@ -17,6 +17,4 @@ public interface IHand {
     Card removeByUrl(String cardUrl);
 
     void sortCards(byte gameId);
-
-    void emptyHand();
 }

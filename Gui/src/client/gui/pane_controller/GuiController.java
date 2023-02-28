@@ -81,7 +81,6 @@ public class GuiController {
                 gui.getBorderPane().setRight(null);
                 openCards = null;
             }
-            cardPane.emptyHand();
             FXMLLoader fxmlLoader = new FXMLLoader(Gui.class.getResource("/client/gui/panes/results-view.fxml"));
             try {
                 gui.getBorderPane().setCenter(fxmlLoader.load());

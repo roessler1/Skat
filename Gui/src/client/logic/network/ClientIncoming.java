@@ -127,7 +127,6 @@ public class ClientIncoming {
     private void updatePlayerPoints() {
         try {
             LogicEvents.getInstance().setPlayerPoints((short[]) in.readObject());
-            cardLogic.clearHand();
             GuiController.getInstance().loadResults();
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);

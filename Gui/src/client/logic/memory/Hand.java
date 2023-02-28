@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Hand implements IHand {
 
     private ArrayList<Card> hand;
-    private final CardSort sort;
+    private CardSort sort;
 
     public Hand() {
         hand = new ArrayList<>();
@@ -61,10 +61,5 @@ public class Hand implements IHand {
     @Override
     public void sortCards(byte gameId) {
         hand = sort.sort(hand, gameId);
-    }
-
-    @Override
-    public void emptyHand() {
-        hand.clear();
     }
 }
