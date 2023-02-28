@@ -39,6 +39,7 @@ public class ServerLogic {
                     return;
                 }
                 server.getClient(outPlayed).sendTurn();
+                return;
             }
             if(playerId == 2) {
                 server.getClient((byte) 0).sendTurn();
