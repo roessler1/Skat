@@ -6,13 +6,13 @@ import skat.compare.CardSort;
 
 public class ServerLogic {
 
-    private Server server;
-    private BidPartLogic bidLogic;
-    private CardPartLogic cardLogic;
-    private PointsLogic pointsLogic;
+    private final Server server;
+    private final BidPartLogic bidLogic;
+    private final CardPartLogic cardLogic;
+    private final PointsLogic pointsLogic;
     private byte outPlayed;
     private byte singlePlayer;
-    private boolean[] next;
+    private final boolean[] next;
 
     public ServerLogic(Server server) {
         this.server = server;
@@ -112,11 +112,9 @@ public class ServerLogic {
 
     public void setPriceStage(byte priceStage) {
         pointsLogic.setPriceStage(priceStage);
-        if(priceStage > 1) {
-            server.getClient((byte) 0).sendPriceStage(priceStage);
-            server.getClient((byte) 1).sendPriceStage(priceStage);
-            server.getClient((byte) 2).sendPriceStage(priceStage);
-        }
+        server.getClient((byte) 0).sendPriceStage(priceStage);
+        server.getClient((byte) 1).sendPriceStage(priceStage);
+        server.getClient((byte) 2).sendPriceStage(priceStage);
         server.getClient(outPlayed).sendTurn();
     }
 
@@ -145,9 +143,8 @@ public class ServerLogic {
         for(byte i = 0; i < 3; i++) {
             if(i == singlePlayer) {
                 server.getClient(i).sendSkat(cardLogic.getSkat());
-            } else {
-                server.getClient(i).sendSinglePlayer(singlePlayer);
             }
+            server.getClient(i).sendSinglePlayer(singlePlayer);
         }
     }
 
