@@ -9,15 +9,15 @@ import java.util.Queue;
 
 public class BidPartLogic {
 
-    private Queue<Bid> bids;
+    private final Queue<Bid> bids;
     private short currentBid;
-    private ArrayList<Byte> biddingPlayers;
+    private final ArrayList<Byte> biddingPlayers;
     private byte listening;
     private byte speaking;
     private byte giving;
-    private Server server;
+    private final Server server;
     private boolean bidAccepted;
-    private ServerLogic logic;
+    private final ServerLogic logic;
 
     public BidPartLogic(Server server, ServerLogic logic) {
         this.logic = logic;
@@ -59,7 +59,7 @@ public class BidPartLogic {
     protected void pass(byte playerId) {
         biddingPlayers.remove(Byte.valueOf(playerId));
         if(biddingPlayers.size() == 1) {
-            if(currentBid == 18)
+            if(currentBid == 18 && !bidAccepted)
                 server.getClient(listening).sendBid(currentBid);
             else
                 logic.setSinglePlayer(biddingPlayers.get(0));
