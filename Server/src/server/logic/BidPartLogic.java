@@ -58,6 +58,10 @@ public class BidPartLogic {
 
     protected void pass(byte playerId) {
         biddingPlayers.remove(Byte.valueOf(playerId));
+        if(biddingPlayers.isEmpty()) {
+            logic.finishRound();
+            return;
+        }
         if(biddingPlayers.size() == 1) {
             if(currentBid == 18 && !bidAccepted)
                 server.getClient(listening).sendBid(currentBid);
@@ -69,6 +73,10 @@ public class BidPartLogic {
     }
 
     protected void nextBid() {
+        if(bids.isEmpty()) {
+            logic.finishRound();
+            return;
+        }
         currentBid = bids.remove().getBid();
         bidAccepted = false;
         if(biddingPlayers.contains(speaking)) {
