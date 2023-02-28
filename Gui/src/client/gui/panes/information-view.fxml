@@ -13,10 +13,14 @@
         <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
               text="Gewinnstufe" alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
         <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
+               text="Am Zug" alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+        <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
               fx:id="singlePlayer" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
               fx:id="gameType" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
         <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
               fx:id="winTier" alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff; -fx-padding: 5 5 5 5" prefWidth="100"
+               fx:id="isTurn" alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
     </GridPane>
 </HBox>

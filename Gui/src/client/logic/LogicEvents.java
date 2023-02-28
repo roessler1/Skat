@@ -84,6 +84,7 @@ public class LogicEvents {
         if(!turn)
             return false;
         outgoing.playCard(cardLogic.getCardByUrl(cardUrl));
+        information.setIsTurnColumn(false);
         turn = false;
         return true;
     }
@@ -134,6 +135,7 @@ public class LogicEvents {
     }
 
     public void setTurn() {
+        information.setIsTurnColumn(true);
         turn = true;
     }
 

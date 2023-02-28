@@ -17,6 +17,8 @@ public class InformationEvents implements Initializable {
     Label gameType;
     @FXML
     Label winTier;
+    @FXML
+    Label isTurn;
 
     public void setSoloPlayerColumn(byte soloPlayer) {
         Platform.runLater(() -> {
@@ -54,6 +56,14 @@ public class InformationEvents implements Initializable {
         });
     }
 
+    public void setIsTurnColumn(boolean turn) {
+        Platform.runLater(() -> {
+            if(turn)
+                isTurn.setText("Ja");
+            else
+                isTurn.setText("Nein");
+        });
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
