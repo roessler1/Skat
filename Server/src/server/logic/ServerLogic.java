@@ -78,8 +78,8 @@ public class ServerLogic {
         for(byte i = 1; i < 3; i++) {
             if(sort.compareByGamePoints(currentPlayed[outPlayed], currentPlayed[i], pointsLogic.getGameId()) == 1) {
                 outPlayed = i;
-                points += currentPlayed[i].getValue();
             }
+            points += currentPlayed[i].getValue();
         }
         if(outPlayed == singlePlayer) {
             if(pointsLogic.getGameId() == 23 || pointsLogic.getGameId() == 35 || pointsLogic.getGameId() == 46 ||
