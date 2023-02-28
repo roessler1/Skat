@@ -140,8 +140,12 @@ public class ServerOutgoing {
         try {
             out.writeByte(1);
             out.flush();
-            out.writeObject(hand);
+            out.writeInt(hand.size());
             out.flush();
+            for(Card card:hand) {
+                out.writeObject(card);
+                out.flush();
+            }
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
