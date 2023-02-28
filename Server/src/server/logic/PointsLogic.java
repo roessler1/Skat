@@ -10,8 +10,8 @@ public class PointsLogic {
     private byte priceStage;
     private byte singlePoints;
     private byte doublePoints;
-    private short[] points;
-    private ArrayList<Byte> peaks;
+    private final short[] points;
+    private final ArrayList<Byte> peaks;
     private short bid;
 
     protected PointsLogic() {
@@ -69,6 +69,9 @@ public class PointsLogic {
             priceStage *= 2;
             priceStage = (byte) -priceStage;
         }
+        if(singlePlayer == -1) {
+            return;
+        }
         points[singlePlayer] += gameId*priceStage;
     }
 
@@ -97,6 +100,8 @@ public class PointsLogic {
     }
 
     private byte calculateStage() {
+        if(peaks.isEmpty())
+            return 0;
         if(peaks.contains((byte) 1)) {
             byte max = 1;
             while(peaks.contains((byte) (max+1))) {
