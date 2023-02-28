@@ -57,15 +57,28 @@ public class CardPartLogic {
         };
         if(game != 23 && (playedCards[0].getColor() == gameId || playedCards[0].getValue() == 2))
             return checkTrump(card, playerId);
+        else if(game == 23)
+            return checkNullGame(card,playerId);
         else
-            return checkColor(card,playerId);
+            return checkColor(card, playerId);
     }
 
-    private boolean checkColor(Card card, byte playerId) {
+    private boolean checkNullGame(Card card, byte playerId) {
         if(card.getColor() == playedCards[0].getColor())
             return true;
         for(Card reference:hands[playerId]) {
             if(reference.getColor() == playedCards[0].getColor()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkColor(Card card, byte playerId) {
+        if(card.getColor() == playedCards[0].getColor() && card.getValue() != 2)
+            return true;
+        for(Card reference:hands[playerId]) {
+            if(reference.getColor() == playedCards[0].getColor() && card.getValue() != 2) {
                 return false;
             }
         }
