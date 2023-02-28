@@ -114,4 +114,103 @@ public class CardSort {
         }
         return 0;
     }
+
+    public byte compareByGamePoints(Card card1, Card card2, byte game) {
+        switch(game) {
+            case 9 -> {
+                return compareDiamondsPoints(card1, card2);
+            }
+            case 10 -> {
+                return compareHeartsPoints(card1, card2);
+            }
+            case 11 -> {
+                return compareSpadesPoints(card1, card2);
+            }
+            case 12, 24 -> {
+                return compareGrandPoints(card1, card2);
+            }
+            case 23, 35, 46, 59 -> {
+                return compareNullPoints(card1, card2);
+            }
+            default -> {
+                return 0;
+            }
+        }
+    }
+
+    private byte compareDiamondsPoints(Card card1, Card card2) {
+        byte result = compareGrandPoints(card1, card2);
+        if(card2.getColor() == 9 && card1.getValue() != 2) {
+            if(card1.getColor() > 9) {
+                result = 1;
+            }
+        }
+        if(card1.getColor() == 9 && card2.getValue() != 2) {
+            if(card2.getColor() > 9) {
+                return -1;
+            }
+        }
+        return result;
+    }
+
+    private byte compareHeartsPoints(Card card1, Card card2) {
+        byte result = compareGrandPoints(card1, card2);
+        if(card2.getColor() == 10 && card1.getValue() != 2) {
+            if(card1.getColor() > 10) {
+                result = 1;
+            }
+        }
+        if(card1.getColor() == 10 && card2.getValue() != 2) {
+            if(card2.getColor() > 10) {
+                return -1;
+            }
+        }
+        return result;
+    }
+
+    private byte compareSpadesPoints(Card card1, Card card2) {
+        byte result = compareGrandPoints(card1, card2);
+        if(card2.getColor() == 11 && card1.getValue() != 2) {
+            if(card1.getColor() > 11) {
+                result = 1;
+            }
+        }
+        if(card1.getColor() == 11 && card2.getValue() != 2) {
+            if(card2.getColor() > 11) {
+                return -1;
+            }
+        }
+        return result;
+    }
+
+    private byte compareGrandPoints(Card card1, Card card2) {
+        if(card1.getValue() == 2 && card2.getValue() == 2) {
+            if(card1.getColor() > card2.getColor()) {
+                return -1;
+            }
+            if(card1.getColor() < card2.getColor()) {
+                return 1;
+            }
+        }
+        if(card1.getValue() == 2) {
+            return -1;
+        }
+        if(card2.getValue() == 2) {
+            return 1;
+        }
+        return compareNullPoints(card1, card2);
+    }
+
+    private byte compareNullPoints(Card card1, Card card2) {
+        if(card1.getColor() == card2.getColor()) {
+            if(card1.getValue() < card2.getValue())
+                return 1;
+            if(card1.getValue() > card2.getValue())
+                return -1;
+            return 0;
+        }
+        else {
+            return -1;
+        }
+    }
 }
