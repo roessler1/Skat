@@ -58,8 +58,8 @@ public class ResultsEvents implements Initializable {
         String points1 = String.valueOf(playerPoints[0]);
         String points2 = String.valueOf(playerPoints[1]);
         String points3 = String.valueOf(playerPoints[2]);
-        player1Points.setText(points1);
-        player1Points.setText(points2);
-        player1Points.setText(points3);
+        player1Points.setText(String.valueOf(LogicEvents.getInstance().getPlayerPoints()[0]));
+        player1Points.setText(String.valueOf(LogicEvents.getInstance().getPlayerPoints()[1]));
+        player1Points.setText(String.valueOf(LogicEvents.getInstance().getPlayerPoints()[2]));
     }
 }
