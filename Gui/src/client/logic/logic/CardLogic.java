@@ -59,7 +59,7 @@ public class CardLogic {
     }
 
     public Card getCardByUrl(String cardUrl) {
-        return hand.getCard(cardUrl);
+        return hand.removeByUrl(cardUrl);
     }
 
     public void addCardsToHand(ArrayList<Card> cards) {
