@@ -61,4 +61,9 @@ public class Hand implements IHand {
     public void sortCards(byte gameId) {
         hand = sort.sort(hand, gameId);
     }
+
+    @Override
+    public void emptyHand() {
+        hand.clear();
+    }
 }

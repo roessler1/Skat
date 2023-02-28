@@ -85,4 +85,8 @@ public class CardLogic {
     public void setSkatEvents(SkatEvents events) {
         skatEvents = events;
     }
+
+    public void clearHand() {
+        hand.emptyHand();
+    }
 }
