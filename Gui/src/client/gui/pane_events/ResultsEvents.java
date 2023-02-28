@@ -40,19 +40,19 @@ public class ResultsEvents implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         byte playerId = LogicEvents.getInstance().getPlayerId();
         if(playerId == 0) {
-            player1.setText("Du\t\t\t\t");
+            player1.setText("Du\t\t\t\t\t");
             player2.setText("Links\t\t\t\t");
             player3.setText("Rechts\t\t\t\t");
         }
         if(playerId == 1) {
             player1.setText("Rechts\t\t\t\t");
-            player2.setText("Du\t\t\t\t");
-            player3.setText("Links\t\t");
+            player2.setText("Du\t\t\t\t\t");
+            player3.setText("Links\t\t\t\t");
         }
         if(playerId == 2) {
             player1.setText("Links\t\t\t\t");
             player2.setText("Rechts\t\t\t\t");
-            player3.setText("Du\t\t\t\t");
+            player3.setText("Du\t\t\t\t\t");
         }
         short[] playerPoints = LogicEvents.getInstance().getPlayerPoints();
         player1Points.setText(String.valueOf(playerPoints[0]));
