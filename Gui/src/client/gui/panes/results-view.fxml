@@ -23,8 +23,8 @@
             </HBox>
         </VBox>
         <HBox alignment="BOTTOM_RIGHT" spacing="20">
-            <Button text="Nächste Runde" onAction="#onNextRoundButtonClicked" prefWidth="80" prefHeight="35"/>
-            <Button text="Hauptmenü" onAction="#onBackButtonClicked" prefWidth="80" prefHeight="35"/>
+            <Button text="Nächste Runde" onAction="#onNextRoundButtonClicked" prefWidth="120" prefHeight="35"/>
+            <Button text="Hauptmenü" onAction="#onBackButtonClicked" prefWidth="120" prefHeight="35"/>
         </HBox>
     </VBox>
 </StackPane>

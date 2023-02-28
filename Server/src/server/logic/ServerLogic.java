@@ -39,14 +39,11 @@ public class ServerLogic {
                     return;
                 }
                 server.getClient(outPlayed).sendTurn();
-                server.getClient((byte) 0).sendPlayedCards(cardLogic.getPlayedCards());
-                server.getClient((byte) 1).sendPlayedCards(cardLogic.getPlayedCards());
-                server.getClient((byte) 2).sendPlayedCards(cardLogic.getPlayedCards());
             }
             if(playerId == 2) {
-                server.getClient((byte) 0).sendPlayedCards(cardLogic.getPlayedCards());
+                server.getClient((byte) 0).sendTurn();
             } else {
-                server.getClient((byte) (playerId+1)).sendPlayedCards(cardLogic.getPlayedCards());
+                server.getClient((byte) (playerId+1)).sendTurn();
             }
         } else
             server.getClient(playerId).sendRetrying(card, pointsLogic.getGameId());

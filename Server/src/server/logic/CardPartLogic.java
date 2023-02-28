@@ -31,6 +31,9 @@ public class CardPartLogic {
         if(cards.size() != 32) {
             cards.clear();
             cards.addAll(Arrays.asList(Card.values()));
+            hands[0].clear();
+            hands[1].clear();
+            hands[2].clear();
         }
         while(!cards.isEmpty()) {
             if(cards.size() == 23) {

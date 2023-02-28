@@ -46,9 +46,11 @@ public class CardPane extends HBox {
             }
             label.setGraphic(view);
             label.setOnMouseClicked(e -> {
-                labels.remove(label);
-                this.getChildren().remove(label);
-                LogicEvents.getInstance().playCard(card);
+                boolean cardPlayable = LogicEvents.getInstance().playCard(card);
+                if(cardPlayable) {
+                    labels.remove(label);
+                    this.getChildren().remove(label);
+                }
             });
             labels.add(label);
             this.getChildren().add(label);

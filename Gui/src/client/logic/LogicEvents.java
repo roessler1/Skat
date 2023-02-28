@@ -76,15 +76,16 @@ public class LogicEvents {
         }
     }
 
-    public void playCard(String cardUrl) {
+    public boolean playCard(String cardUrl) {
         if(cardLogic.getHandSize() > 10) {
             cardLogic.putToSkat(cardUrl);
-            return;
+            return true;
         }
         if(!turn)
-            return;
+            return false;
         outgoing.playCard(cardLogic.getCardByUrl(cardUrl));
         turn = false;
+        return true;
     }
 
     public void closeConnection() {

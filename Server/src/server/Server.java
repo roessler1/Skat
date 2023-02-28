@@ -50,7 +50,7 @@ public class Server extends Thread {
     private void observeInputs() {
         while(sockets[0].isConnected() && sockets[1].isConnected() && sockets[2].isConnected()) {
             for(byte i = 0; i < sockets.length; i++) {
-                if(incomings[i].available()) {
+                    if(incomings[i].available()) {
                     incomings[i].read();
                 }
             }
