@@ -5,21 +5,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Label?>
 <StackPane style="-fx-background-color: #349746" xmlns:fx="http://javafx.com/fxml"
            fx:controller="client.gui.pane_events.ResultsEvents">
     <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #b9b9b9; -fx-padding: 5 5 10 5;" maxWidth="700" maxHeight="400">
-        <VBox alignment="TOP_LEFT" style="-fx-background-color: #ffffff; -fx-padding: 5 20 5 5;">
+        <VBox style="-fx-background-color: #ffffff; -fx-padding: 5 20 5 5;">
             <HBox alignment="CENTER_LEFT">
                 <Text style="-fx-font-size: 14.0" fx:id="player1"/>
-                <Text style="-fx-font-size: 14.0" fx:id="player1Points"/>
+                <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff" fx:id="player1Points"/>
             </HBox>
             <HBox alignment="CENTER_LEFT">
                 <Text style="-fx-font-size: 14.0" fx:id="player2"/>
-                <Text style="-fx-font-size: 14.0" fx:id="player2Points"/>
+                <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff" fx:id="player2Points"/>
             </HBox>
             <HBox alignment="CENTER_LEFT">
                 <Text style="-fx-font-size: 14.0" fx:id="player3"/>
-                <Text style="-fx-font-size: 14.0" fx:id="player3Points"/>
+                <Label style="-fx-font-size: 14.0; -fx-background-color: #ffffff" fx:id="player3Points"/>
             </HBox>
         </VBox>
         <HBox alignment="BOTTOM_RIGHT" spacing="20">
