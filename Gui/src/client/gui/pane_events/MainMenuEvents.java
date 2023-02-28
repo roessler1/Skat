@@ -2,6 +2,7 @@ package client.gui.pane_events;
 
 import client.gui.pane_controller.GuiController;
 import client.logic.LogicEvents;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 
 public class MainMenuEvents {
@@ -18,6 +19,7 @@ public class MainMenuEvents {
 
     @FXML
     protected void onExitButtonClicked() {
+        Platform.exit();
         System.exit(0);
     }
 }

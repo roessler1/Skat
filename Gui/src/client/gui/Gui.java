@@ -2,10 +2,10 @@ package client.gui;
 
 import client.gui.pane_controller.GuiController;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Gui extends Application {
@@ -23,6 +23,10 @@ public class Gui extends Application {
         this.primaryStage.setTitle("Skat");
         this.primaryStage.setFullScreen(true);
         this.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+        this.primaryStage.setOnCloseRequest(windowEvent -> {
+            Platform.exit();
+            System.exit(0);
+        });
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
         GuiController.getInstance().loadMainMenu();
