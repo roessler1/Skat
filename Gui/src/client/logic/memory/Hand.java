@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Hand implements IHand {
 
     private ArrayList<Card> hand;
-    private CardSort sort;
+    private final CardSort sort;
 
     public Hand() {
         hand = new ArrayList<>();
@@ -60,5 +60,10 @@ public class Hand implements IHand {
     @Override
     public void sortCards(byte gameId) {
         hand = sort.sort(hand, gameId);
+    }
+
+    @Override
+    public void emptyHand() {
+        hand.clear();
     }
 }

@@ -31,8 +31,7 @@ public class CardPane extends HBox {
     }
 
     public void addCards(String[] cardsUrls) {
-        labels.clear();
-        this.getChildren().clear();
+        emptyHand();
         for(String card:cardsUrls) {
             Label label = new Label();
             label.setAlignment(Pos.TOP_LEFT);
@@ -54,5 +53,10 @@ public class CardPane extends HBox {
             labels.add(label);
             this.getChildren().add(label);
         }
+    }
+
+    public void emptyHand() {
+        labels.clear();
+        this.getChildren().clear();
     }
 }
