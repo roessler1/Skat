@@ -140,7 +140,7 @@ public class ServerOutgoing {
         try {
             out.writeByte(1);
             out.flush();
-            out.writeInt(hand.size());
+            out.writeByte((byte) hand.size());
             out.flush();
             for(Card card:hand) {
                 out.writeObject(card);

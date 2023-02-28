@@ -165,8 +165,11 @@ public class ClientIncoming {
     private void updateHand() {
         try {
             ArrayList<Card> hand = new ArrayList<>();
-            for(int i = 0; i < in.readInt(); i++) {
+            byte max = in.readByte();
+            byte i = 0;
+            while(i < max) {
                 hand.add((Card) in.readObject());
+                i++;
             }
             cardLogic.addCardsToHand(hand);
         } catch(IOException | ClassNotFoundException e) {
