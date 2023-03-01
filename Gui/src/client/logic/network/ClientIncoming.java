@@ -22,7 +22,6 @@ public class ClientIncoming {
     private ExecutorService executor;
     private boolean isUp;
     private CardLogic cardLogic;
-    private byte singlePlayer;
 
     public ClientIncoming(InputStream in, CardLogic cardLogic) {
         try {
@@ -172,6 +171,7 @@ public class ClientIncoming {
                 i++;
             }
             cardLogic.addCardsToHand(hand);
+            LogicEvents.getInstance().getInformation().emptyInformation();
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

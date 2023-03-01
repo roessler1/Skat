@@ -53,6 +53,7 @@ public class InformationEvents implements Initializable {
                 case 4 -> winTier.setText("Schwarz");
                 case 5 -> winTier.setText("Ouvert");
             }
+            setIsTurnColumn(false);
         });
     }
 
@@ -63,6 +64,13 @@ public class InformationEvents implements Initializable {
             else
                 isTurn.setText("Nein");
         });
+    }
+
+    public void emptyInformation() {
+        singlePlayer.setText("");
+        gameType.setText("");
+        winTier.setText("");
+        isTurn.setText("");
     }
 
     @Override
