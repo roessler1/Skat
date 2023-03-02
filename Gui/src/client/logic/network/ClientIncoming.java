@@ -1,6 +1,7 @@
 package client.logic.network;
 
 import client.gui.pane_controller.GuiController;
+import javafx.application.Platform;
 import skat.log.Log;
 import client.logic.logic.CardLogic;
 import skat.cards.Card;
@@ -22,7 +23,6 @@ public class ClientIncoming {
     private ExecutorService executor;
     private boolean isUp;
     private CardLogic cardLogic;
-    private byte singlePlayer;
 
     public ClientIncoming(InputStream in, CardLogic cardLogic) {
         try {
@@ -172,6 +172,7 @@ public class ClientIncoming {
                 i++;
             }
             cardLogic.addCardsToHand(hand);
+            Platform.runLater(() ->LogicEvents.getInstance().getInformation().emptyInformation());
         } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

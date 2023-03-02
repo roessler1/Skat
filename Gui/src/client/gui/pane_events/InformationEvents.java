@@ -42,6 +42,7 @@ public class InformationEvents implements Initializable {
                 case 24 -> gameType.setText("Grand");
             }
         });
+        setIsTurnColumn(false);
     }
 
     public void setWinTierColumn(byte profitLevel) {
@@ -63,6 +64,13 @@ public class InformationEvents implements Initializable {
             else
                 isTurn.setText("Nein");
         });
+    }
+
+    public void emptyInformation() {
+        singlePlayer.setText("");
+        gameType.setText("");
+        winTier.setText("");
+        isTurn.setText("");
     }
 
     @Override
