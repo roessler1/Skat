@@ -33,7 +33,7 @@ public class ResultsEvents implements Initializable {
 
     @FXML
     protected void onBackButtonClicked() {
-        LogicEvents.deleteInstance();
+        LogicEvents.getInstance().closeConnection();
     }
 
     @Override

@@ -181,7 +181,7 @@ public class ClientIncoming {
     public void closeInput() {
         isUp = false;
         cardLogic = null;
-        LogicEvents.getInstance().closeConnection();
+        LogicEvents.deleteInstance();
     }
 
     public boolean isUp() {
