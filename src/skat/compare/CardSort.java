@@ -90,7 +90,7 @@ public class CardSort {
             if(card1.getColor() > 12)
                 result = 1;
         }
-        if(card1.getColor() == 12 && card2.getColor() != 2) {
+        if(card1.getColor() == 12 && card2.getValue() != 2) {
             if(card2.getColor() > 12)
                 result = -1;
         }
@@ -113,6 +113,10 @@ public class CardSort {
                 return -1;
             if(card1.getValue() < card2.getValue())
                 return 1;
+            if(card1.getId() > card2.getId())
+                return 1;
+            if(card1.getId() < card2.getId())
+                return -1;
         }
         if(card1.getColor() > card2.getColor())
             return -1;
