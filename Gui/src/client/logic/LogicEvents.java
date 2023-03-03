@@ -91,9 +91,9 @@ public class LogicEvents {
 
     public void closeConnection() {
         if(!incoming.isUp()) {
+            outgoing.closeOutput();
             incoming.closeInput();
         } else {
-            outgoing.closeOutput();
             if(server != null) {
                 server.closeServer();
                 server = null;
