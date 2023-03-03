@@ -73,6 +73,7 @@ public class CardLogic {
     public void setGameId(byte gameId) {
         LogicEvents.getInstance().getInformation().setGameTypeColumn(gameId);
         hand.sortCards(gameId);
+        GuiController.getInstance().addCards(hand.getCardsUrls());
     }
 
     public boolean hasSkat() {

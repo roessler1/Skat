@@ -76,9 +76,8 @@ public class ServerLogic {
         CardSort sort = new CardSort();
         byte points = currentPlayed[0].getValue();
         for(byte i = 1; i < 3; i++) {
-            if(sort.compareByGamePoints(currentPlayed[outPlayed], currentPlayed[i], pointsLogic.getGameId()) == 1) {
+            if(sort.compareForTrick(currentPlayed[outPlayed], currentPlayed[i], pointsLogic.getGameId()) == 1)
                 outPlayed = i;
-            }
             points += currentPlayed[i].getValue();
         }
         if(outPlayed == singlePlayer) {

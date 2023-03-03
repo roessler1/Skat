@@ -29,7 +29,7 @@ class CardSortTest {
         cards.add(Card.S_ACE);
         cards.add(Card.D_JACK);
         cards.add(Card.H_JACK);
-        cards.add(Card.H_SEVEN);
+        cards.add(Card.H_TEN);
         cards.add(Card.H_QUEEN);
     }
 
@@ -42,8 +42,8 @@ class CardSortTest {
         Assertions.assertEquals(7, cards.get(3).getId());
         Assertions.assertEquals(8, cards.get(4).getId());
         Assertions.assertEquals(15, cards.get(5).getId());
-        Assertions.assertEquals(18, cards.get(6).getId());
-        Assertions.assertEquals(23, cards.get(7).getId());
+        Assertions.assertEquals(20, cards.get(6).getId());
+        Assertions.assertEquals(18, cards.get(7).getId());
         Assertions.assertEquals(25, cards.get(8).getId());
         Assertions.assertEquals(31, cards.get(9).getId());
     }
@@ -57,7 +57,7 @@ class CardSortTest {
         Assertions.assertEquals(15, cards.get(3).getId());
         Assertions.assertEquals(18, cards.get(4).getId());
         Assertions.assertEquals(19, cards.get(5).getId());
-        Assertions.assertEquals(23, cards.get(6).getId());
+        Assertions.assertEquals(20, cards.get(6).getId());
         Assertions.assertEquals(25, cards.get(7).getId());
         Assertions.assertEquals(27, cards.get(8).getId());
         Assertions.assertEquals(31, cards.get(9).getId());
@@ -72,8 +72,8 @@ class CardSortTest {
         Assertions.assertEquals(7, cards.get(3).getId());
         Assertions.assertEquals(8, cards.get(4).getId());
         Assertions.assertEquals(15, cards.get(5).getId());
-        Assertions.assertEquals(18, cards.get(6).getId());
-        Assertions.assertEquals(23, cards.get(7).getId());
+        Assertions.assertEquals(20, cards.get(6).getId());
+        Assertions.assertEquals(18, cards.get(7).getId());
         Assertions.assertEquals(25, cards.get(8).getId());
         Assertions.assertEquals(31, cards.get(9).getId());
     }
@@ -87,8 +87,8 @@ class CardSortTest {
         Assertions.assertEquals(15, cards.get(3).getId());
         Assertions.assertEquals(0, cards.get(4).getId());
         Assertions.assertEquals(7, cards.get(5).getId());
-        Assertions.assertEquals(18, cards.get(6).getId());
-        Assertions.assertEquals(23, cards.get(7).getId());
+        Assertions.assertEquals(20, cards.get(6).getId());
+        Assertions.assertEquals(18, cards.get(7).getId());
         Assertions.assertEquals(25, cards.get(8).getId());
         Assertions.assertEquals(31, cards.get(9).getId());
     }
@@ -98,8 +98,8 @@ class CardSortTest {
         cards = cardSort.sort(cards, (byte) 10);
         Assertions.assertEquals(19, cards.get(0).getId());
         Assertions.assertEquals(27, cards.get(1).getId());
-        Assertions.assertEquals(18, cards.get(2).getId());
-        Assertions.assertEquals(23, cards.get(3).getId());
+        Assertions.assertEquals(20, cards.get(2).getId());
+        Assertions.assertEquals(18, cards.get(3).getId());
         Assertions.assertEquals(0, cards.get(4).getId());
         Assertions.assertEquals(7, cards.get(5).getId());
         Assertions.assertEquals(8, cards.get(6).getId());
@@ -119,7 +119,7 @@ class CardSortTest {
         Assertions.assertEquals(7, cards.get(5).getId());
         Assertions.assertEquals(8, cards.get(6).getId());
         Assertions.assertEquals(15, cards.get(7).getId());
-        Assertions.assertEquals(18, cards.get(8).getId());
-        Assertions.assertEquals(23, cards.get(9).getId());
+        Assertions.assertEquals(20, cards.get(8).getId());
+        Assertions.assertEquals(18, cards.get(9).getId());
     }
 }
