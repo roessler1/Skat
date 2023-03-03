@@ -90,7 +90,7 @@ public class LogicEvents {
     }
 
     public void closeConnection() {
-        if(!incoming.isUp()) {
+        if(incoming.isUp()) {
             outgoing.closeOutput();
             incoming.closeInput();
         } else {

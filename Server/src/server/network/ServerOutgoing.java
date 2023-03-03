@@ -44,7 +44,6 @@ public class ServerOutgoing {
         try {
             out.writeByte(12);
             out.flush();
-            out.close();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
