@@ -63,6 +63,8 @@ public class CardLogic {
     }
 
     public void addCardsToHand(ArrayList<Card> cards) {
+        while(cards.contains(null))
+            cards.remove(null);
         if (cards.size() != 1) {
             GuiController.getInstance().unloadCenterPane();
         }
