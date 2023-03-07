@@ -148,6 +148,8 @@ public class LogicEvents {
     }
 
     public void playNextRound() {
+        turn = false;
+        cardLogic.setSkat(null);
         outgoing.playNextRound();
     }
 

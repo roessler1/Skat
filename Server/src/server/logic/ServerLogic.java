@@ -54,6 +54,7 @@ public class ServerLogic {
         for(byte i = 0; i < next.length; i++) {
             next[i] = false;
         }
+        singlePlayer = -1;
         pointsLogic.nextRound();
         bidLogic.resetBids();
         outPlayed = bidLogic.getListening();
