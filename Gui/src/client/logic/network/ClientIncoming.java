@@ -128,10 +128,14 @@ public class ClientIncoming {
 
     private void updatePlayerPoints() {
         try {
-            LogicEvents.getInstance().setPlayerPoints((short[]) in.readObject());
+            short[] points = new short[3];
+            for(byte i = 0; i < points.length; i++) {
+                points[i] = in.readShort();
+            }
+            LogicEvents.getInstance().setPlayerPoints(points);
             cardLogic.clearHand();
             GuiController.getInstance().loadResults();
-        } catch(IOException | ClassNotFoundException e) {
+        } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
     }

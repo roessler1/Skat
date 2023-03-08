@@ -106,8 +106,9 @@ public class ServerOutgoing {
         try {
             out.writeByte(5);
             out.flush();
-            out.writeObject(playerPoints);
-            out.flush();
+            for(byte i = 0; i < playerPoints.length; i++) {
+                out.writeShort(playerPoints[i]);
+            }
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
