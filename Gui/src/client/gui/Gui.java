@@ -1,6 +1,7 @@
 package client.gui;
 
 import client.gui.pane_controller.GuiController;
+import client.logic.LogicEvents;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -23,6 +24,7 @@ public class Gui extends Application {
         this.primaryStage.setFullScreen(true);
         this.primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         this.primaryStage.setOnCloseRequest(windowEvent -> {
+            LogicEvents.deleteInstance();
             Platform.exit();
             System.exit(0);
         });

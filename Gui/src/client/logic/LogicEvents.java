@@ -154,7 +154,8 @@ public class LogicEvents {
     }
 
     public static void deleteInstance() {
-        logicEvents.closeConnection();
+        if(logicEvents != null)
+            logicEvents.closeConnection();
         logicEvents = null;
     }
 
