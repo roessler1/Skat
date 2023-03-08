@@ -67,20 +67,20 @@ public class ServerLogic {
 
     private void calculatePoints() {
         Card[] currentPlayed = cardLogic.getPlayedCards();
-        while(outPlayed > 0) {
-            Card temp = currentPlayed[0];
-            currentPlayed[0] = currentPlayed[2];
-            currentPlayed[2] = currentPlayed[1];
-            currentPlayed[1] = temp;
-            outPlayed--;
-        }
         CardSort sort = new CardSort();
         byte points = currentPlayed[0].getValue();
+        Card reference = currentPlayed[0];
+        byte newOutPlayed = outPlayed;
         for(byte i = 1; i < 3; i++) {
-            if(sort.compareForTrick(currentPlayed[outPlayed], currentPlayed[i], pointsLogic.getGameId()) == 1)
-                outPlayed = i;
+            if(sort.compareForTrick(reference, currentPlayed[i], pointsLogic.getGameId()) == 1) {
+                newOutPlayed = (byte) (outPlayed+i);
+                reference = currentPlayed[i];
+            }
             points += currentPlayed[i].getValue();
         }
+        outPlayed = newOutPlayed;
+        if(outPlayed > 2)
+            outPlayed -= 3;
         if(outPlayed == singlePlayer) {
             if(pointsLogic.getGameId() == 23 || pointsLogic.getGameId() == 35 || pointsLogic.getGameId() == 46 ||
                     pointsLogic.getGameId() == 59 || pointsLogic.getPriceStage() == 5) {
