@@ -1,6 +1,7 @@
 package client.gui.panes;
 
 import client.gui.Gui;
+import client.gui.pane_controller.GuiController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,11 +16,11 @@ public class OpenCardsPane extends VBox {
 
     public OpenCardsPane(String[] cardsUrls, double screenWidth, double screenHeight) {
         labels = new ArrayList<>();
-        double width = (190*(screenWidth*100/1920)/100)*0.65;
-        double height = ((294*(screenHeight*100/1080)/100))*0.65;
+        double width = GuiController.getInstance().getWidth() *0.65;
+        double height = GuiController.getInstance().getHeight()*0.65;
         this.setAlignment(Pos.CENTER_RIGHT);
         this.setStyle("-fx-background-color: #349746");
-        this.setSpacing(-(height/2));
+        this.setSpacing(-(height/(5/3.0)));
         Label label;
         for(String url:cardsUrls) {
             ImageView view = new ImageView(new Image(Gui.class.getResourceAsStream(url), width, height, true, false));

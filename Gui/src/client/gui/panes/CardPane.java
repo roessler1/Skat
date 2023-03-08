@@ -1,6 +1,7 @@
 package client.gui.panes;
 
 import client.gui.Gui;
+import client.gui.pane_controller.GuiController;
 import client.logic.LogicEvents;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -21,12 +22,11 @@ public class CardPane extends HBox {
     double height;
 
     public CardPane(double screenWidth, double screenHeight) {
-        width = 190*(screenWidth*100/1920)/100;
-        height = 294*(screenHeight*100/1080)/100;
+        width = GuiController.getInstance().getWidth();
+        height = GuiController.getInstance().getHeight();
         this.setAlignment(Pos.CENTER);
         this.setStyle("-fx-background-color: #349746");
-        this.setSpacing(-(width/2));
-        this.setWidth(screenWidth);
+        this.setSpacing(-(width/3));
         this.setHeight(height);
     }
 

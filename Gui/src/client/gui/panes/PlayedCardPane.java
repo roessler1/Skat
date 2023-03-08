@@ -1,6 +1,7 @@
 package client.gui.panes;
 
 import client.gui.Gui;
+import client.gui.pane_controller.GuiController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -18,8 +19,8 @@ public class PlayedCardPane extends StackPane {
     double height;
 
     public PlayedCardPane(double screenWidth, double screenHeight) {
-        width = (190*(screenWidth*100/1920)/100)*0.75;
-        height = (294*(screenHeight*100/1080)/100)*0.75;
+        width = GuiController.getInstance().getWidth() *0.75;
+        height = GuiController.getInstance().getHeight()*0.75;
         this.setStyle("-fx-background-color: #349746");
         labels = new Label[3];
         for(byte i = 0; i < labels.length; i++) {

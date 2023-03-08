@@ -15,7 +15,6 @@ public class Gui extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        GuiController.loadGuiController(this);
         borderPane = new BorderPane();
         borderPane.setStyle("-fx-background-color: #349746");
         Scene scene = new Scene(borderPane);
@@ -29,6 +28,7 @@ public class Gui extends Application {
         });
         this.primaryStage.setScene(scene);
         this.primaryStage.show();
+        GuiController.loadGuiController(this);
         GuiController.getInstance().loadMainMenu();
     }
 

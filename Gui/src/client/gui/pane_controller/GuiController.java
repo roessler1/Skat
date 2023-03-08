@@ -19,10 +19,14 @@ public class GuiController {
     private CardPane cardPane;
     private PlayedCardPane playedCardPane;
     private OpenCardsPane openCards;
+    private final double cardWidth;
+    private final double cardHeight;
 
     private GuiController(Gui gui) {
         guiController = this;
         this.gui = gui;
+        cardWidth = gui.getBorderPane().getWidth()*0.6/13*2;
+        cardHeight = cardWidth*(294.0/190.0);
     }
 
     public void loadMainMenu() {
@@ -162,6 +166,14 @@ public class GuiController {
     public static void loadGuiController(Gui gui) {
         if(guiController == null)
             new GuiController(gui);
+    }
+
+    public double getWidth() {
+        return cardWidth;
+    }
+
+    public double getHeight() {
+        return cardHeight;
     }
 
     public static GuiController getInstance() {
