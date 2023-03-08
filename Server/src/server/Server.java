@@ -12,6 +12,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -20,12 +21,12 @@ public class Server extends Thread {
 
     private ServerOutgoing[] outgoings;
     private ServerIncoming[] incomings;
-    private Socket[] sockets;
+    private ArrayList<Socket> sockets;
     private ExecutorService executor;
     private ServerSocketChannel socket;
 
     public Server() {
-        sockets = new Socket[3];
+        sockets = new ArrayList<>();
         outgoings = new ServerOutgoing[3];
         incomings = new ServerIncoming[3];
         try {
@@ -38,7 +39,7 @@ public class Server extends Thread {
     }
 
     private void establishConnection(Socket socket, byte playerId, ServerLogic logic) {
-        sockets[playerId] = socket;
+        sockets.add(socket);
         try {
             outgoings[playerId] = new ServerOutgoing(socket.getOutputStream(), playerId);
             incomings[playerId] = new ServerIncoming(socket.getInputStream(), playerId, logic);
@@ -48,8 +49,8 @@ public class Server extends Thread {
     }
 
     private void observeInputs() {
-        while(sockets[0].isConnected() && sockets[1].isConnected() && sockets[2].isConnected()) {
-            for(byte i = 0; i < sockets.length; i++) {
+        while(sockets.size() == 3 && sockets.get(0).isConnected() && sockets.get(1).isConnected() && sockets.get(2).isConnected()) {
+            for(byte i = 0; i < sockets.size(); i++) {
                     if(incomings[i].available()) {
                     incomings[i].read();
                 }
@@ -76,6 +77,12 @@ public class Server extends Thread {
             while(sc == null && socket.isOpen()) {
                 try {
                     sc = socket.accept();
+                    if(incomings[1] != null && incomings[1].available()) {
+                        sockets.remove(1);
+                        incomings[1] = null;
+                        outgoings[1] = null;
+                        i--;
+                    }
                 } catch(IOException e) {
                     Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
                 }
@@ -95,14 +102,24 @@ public class Server extends Thread {
         }
     }
 
+    public void closeConnection() {
+        for(byte i = 0; i < 3; i++) {
+            getClient(i).sendClosing();
+        }
+        closeServer();
+    }
+
     public void closeServer() {
         if(this.isAlive()) {
             this.interrupt();
+            for(byte i = 0; i < 3; i++) {
+                if(getClient(i) != null)
+                    getClient(i).sendClosing();
+            }
         }
         try {
             if(socket.isOpen())
                 socket.close();
-            sockets[0].close();
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }

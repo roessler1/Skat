@@ -154,10 +154,7 @@ public class ServerLogic {
     }
 
     public void closeServer() {
-        for(byte i = 0; i < 3; i++) {
-            server.getClient(i).sendClosing();
-            server.closeServer();
-        }
+        server.closeConnection();
     }
 
     public void nextRound(byte playerId) {
