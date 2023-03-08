@@ -9,10 +9,10 @@ import java.util.Random;
 
 public class CardPartLogic {
 
-    private final ArrayList<Card> cards;
-    private final ArrayList<Card>[] hands;
-    private final Card[] playedCards;
-    private final Card[] skat;
+    private ArrayList<Card> cards;
+    private ArrayList<Card>[] hands;
+    private Card[] playedCards;
+    private Card[] skat;
     private final Random random;
     private byte gameId;
 
@@ -67,8 +67,9 @@ public class CardPartLogic {
         if(card.getColor() == playedCards[0].getColor())
             return true;
         for(Card reference:hands[playerId]) {
-            if(reference.getColor() == playedCards[0].getColor())
+            if(reference.getColor() == playedCards[0].getColor()) {
                 return false;
+            }
         }
         return true;
     }
@@ -77,20 +78,20 @@ public class CardPartLogic {
         if(card.getColor() == playedCards[0].getColor() && card.getValue() != 2)
             return true;
         for(Card reference:hands[playerId]) {
-            if(reference.getValue() == 2)
-                continue;
-            if(reference.getColor() == playedCards[0].getColor())
+            if(reference.getColor() == playedCards[0].getColor() && card.getValue() != 2) {
                 return false;
+            }
         }
         return true;
     }
 
     private boolean checkTrump(Card card, byte playerId) {
-        if(card.getColor() == gameId || card.getValue() == 2)
+        if(card.getValue() == 2 || card.getColor() == gameId)
             return true;
         for(Card reference:hands[playerId]) {
-            if(reference.getColor() == gameId || reference.getValue() == 2)
+            if(reference.getColor() == gameId || reference.getValue() == 2) {
                 return false;
+            }
         }
         return true;
     }

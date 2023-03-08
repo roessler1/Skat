@@ -83,12 +83,16 @@ public class ServerLogic {
             outPlayed -= 3;
         if(outPlayed == singlePlayer) {
             if(pointsLogic.getGameId() == 23 || pointsLogic.getGameId() == 35 || pointsLogic.getGameId() == 46 ||
-                    pointsLogic.getGameId() == 59 || pointsLogic.getPriceStage() == 5) {
+                    pointsLogic.getGameId() == 59) {
                 pointsLogic.giveUp(singlePlayer);
                 finishRound();
             }
             pointsLogic.addSinglePoints(points);
         } else {
+            if(pointsLogic.getPriceStage() > 3) {
+                pointsLogic.giveUp(singlePlayer);
+                finishRound();
+            }
             pointsLogic.addDoublePoints(points);
         }
     }
