@@ -122,8 +122,6 @@ public class PointsLogic {
     protected void giveUp(byte singlePlayer) {
         if(gameId == 23 || gameId == 35 || gameId == 46 || gameId == 59)
             points[singlePlayer] += (gameId*-2);
-        else
-            points[singlePlayer] += (gameId*priceStage*-2);
     }
 
     protected void addPeak(Card card) {
