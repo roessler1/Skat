@@ -141,6 +141,7 @@ public class ServerLogic {
 
     protected void setSinglePlayer(byte playerId) {
         singlePlayer = playerId;
+        cardLogic.setSinglePlayer(playerId);
         pointsLogic.setBid(bidLogic.getCurrentBid());
         for(byte i = 0; i < 3; i++) {
             if(i == singlePlayer) {

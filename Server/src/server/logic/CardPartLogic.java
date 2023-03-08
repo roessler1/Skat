@@ -9,12 +9,13 @@ import java.util.Random;
 
 public class CardPartLogic {
 
-    private ArrayList<Card> cards;
-    private ArrayList<Card>[] hands;
-    private Card[] playedCards;
-    private Card[] skat;
+    private final ArrayList<Card> cards;
+    private final ArrayList<Card>[] hands;
+    private final Card[] playedCards;
+    private final Card[] skat;
     private final Random random;
     private byte gameId;
+    private byte singlePlayer;
 
     protected CardPartLogic() {
         cards = new ArrayList<>();
@@ -28,6 +29,7 @@ public class CardPartLogic {
     }
 
     protected void shuffleCards() {
+        singlePlayer = -1;
         if(cards.size() != 32) {
             cards.clear();
             cards.addAll(Arrays.asList(Card.values()));
@@ -112,6 +114,8 @@ public class CardPartLogic {
     }
 
     protected void setGameId(byte gameId) {
+        CardSort sort = new CardSort();
+        hands[singlePlayer] = sort.sort(hands[singlePlayer], gameId);
         this.gameId = gameId;
     }
 
@@ -153,5 +157,9 @@ public class CardPartLogic {
             hand[i] = hands[singlePlayer].get(i).getUrl();
         }
         return hand;
+    }
+
+    protected void setSinglePlayer(byte playerId) {
+        singlePlayer = playerId;
     }
 }

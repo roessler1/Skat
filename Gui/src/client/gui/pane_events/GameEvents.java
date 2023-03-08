@@ -53,10 +53,10 @@ public class GameEvents implements Initializable {
             else if(isHand)
                 game = 35;
         }
-        if(profitLevel == 5)
-            LogicEvents.getInstance().sendOpenGameCards();
         LogicEvents.getInstance().sendGameId(game);
         LogicEvents.getInstance().sendPriceStage(profitLevel);
+        if(profitLevel == 5)
+            LogicEvents.getInstance().sendOpenGameCards();
         GuiController.getInstance().unloadCenterPane();
     }
 
