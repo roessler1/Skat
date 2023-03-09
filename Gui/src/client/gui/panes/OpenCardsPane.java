@@ -13,9 +13,11 @@ import java.util.ArrayList;
 public class OpenCardsPane extends VBox {
 
     ArrayList<ImageView> labels;
+    ArrayList<String> cards;
 
     public OpenCardsPane(String[] cardsUrls, double screenWidth, double screenHeight) {
         labels = new ArrayList<>();
+        cards = new ArrayList<>();
         double width = GuiController.getInstance().getWidth() *0.65;
         double height = GuiController.getInstance().getHeight()*0.65;
         this.setAlignment(Pos.CENTER_RIGHT);
@@ -25,6 +27,7 @@ public class OpenCardsPane extends VBox {
         for(String url:cardsUrls) {
             ImageView view = new ImageView(new Image(Gui.class.getResourceAsStream(url), width, height, true, false));
             labels.add(view);
+            cards.add(url);
             label = new Label();
             label.setGraphic(view);
             this.getChildren().add(label);
@@ -33,13 +36,14 @@ public class OpenCardsPane extends VBox {
 
     public void removeCard(String[] playedCards) {
         byte pos = 0;
-        while(pos < 3 && playedCards[pos] != null) {
+        while(pos < 3 && !playedCards[pos].isEmpty()) {
             pos++;
         }
         pos--;
-        for(ImageView label:labels) {
-            if(label.getImage().getUrl().equals(playedCards[pos])) {
-                this.getChildren().remove(pos);
+        for(byte i = 0; i < cards.size(); i++) {
+            if(cards.get(i).equals(playedCards[pos])) {
+                this.getChildren().remove(i);
+                cards.remove(i);
             }
         }
     }
