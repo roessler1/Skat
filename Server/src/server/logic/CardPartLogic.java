@@ -80,7 +80,7 @@ public class CardPartLogic {
         if(card.getColor() == playedCards[0].getColor() && card.getValue() != 2)
             return true;
         for(Card reference:hands[playerId]) {
-            if(reference.getColor() == playedCards[0].getColor() && card.getValue() != 2) {
+            if(reference.getColor() == playedCards[0].getColor() && reference.getValue() != 2) {
                 return false;
             }
         }
