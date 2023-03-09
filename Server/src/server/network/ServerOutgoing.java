@@ -19,7 +19,6 @@ public class ServerOutgoing {
             this.out = new ObjectOutputStream(new BufferedOutputStream(out));
             this.out.flush();
             this.out.writeByte(6);
-            this.out.flush();
             this.out.writeByte(playerId);
             this.out.flush();
         } catch(IOException e) {
@@ -30,9 +29,7 @@ public class ServerOutgoing {
     public void sendRetrying(Card card, byte gameId) {
         try {
             out.writeByte(13);
-            out.flush();
             out.writeObject(card);
-            out.flush();
             out.writeByte(gameId);
             out.flush();
         } catch(IOException e) {
@@ -52,7 +49,6 @@ public class ServerOutgoing {
     public void sendSinglePlayer(byte singlePlayer) {
         try {
             out.writeByte(11);
-            out.flush();
             out.writeByte(singlePlayer);
             out.flush();
         } catch(IOException e) {
@@ -63,7 +59,6 @@ public class ServerOutgoing {
     public void sendPriceStage(byte priceStage) {
         try {
             out.writeByte(10);
-            out.flush();
             out.writeByte(priceStage);
             out.flush();
         } catch(IOException e) {
@@ -74,7 +69,6 @@ public class ServerOutgoing {
     public void sendGame(byte gameId) {
         try {
             out.writeByte(9);
-            out.flush();
             out.writeByte(gameId);
             out.flush();
         } catch(IOException e) {
@@ -94,7 +88,6 @@ public class ServerOutgoing {
     public void sendBid(short bid) {
         try {
             out.writeByte(7);
-            out.flush();
             out.writeShort(bid);
             out.flush();
         } catch(IOException e){
@@ -105,10 +98,9 @@ public class ServerOutgoing {
     public void sendPlayerPoints(short[] playerPoints) {
         try {
             out.writeByte(5);
+            out.writeObject(playerPoints);
+            out.reset();
             out.flush();
-            for(byte i = 0; i < playerPoints.length; i++) {
-                out.writeShort(playerPoints[i]);
-            }
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -117,7 +109,6 @@ public class ServerOutgoing {
     public void sendOpenGameCards(String[] openCards) {
         try {
             out.writeByte(4);
-            out.flush();
             out.writeObject(openCards);
             out.flush();
         } catch(IOException e) {
@@ -128,7 +119,6 @@ public class ServerOutgoing {
     public void sendSkat(Card[] skat) {
         try {
             out.writeByte(3);
-            out.flush();
             out.writeObject(skat);
             out.flush();
         } catch(IOException e) {
@@ -139,13 +129,9 @@ public class ServerOutgoing {
     public void sendHand(ArrayList<Card> hand) {
         try {
             out.writeByte(1);
+            out.writeObject(hand);
+            out.reset();
             out.flush();
-            out.writeByte((byte) hand.size());
-            out.flush();
-            for(Card card:hand) {
-                out.writeObject(card);
-                out.flush();
-            }
         } catch(IOException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
@@ -161,7 +147,6 @@ public class ServerOutgoing {
         }
         try {
             out.writeByte(2);
-            out.flush();
             out.writeObject(cards);
             out.flush();
         } catch(IOException e) {

@@ -36,7 +36,6 @@ public class ClientOutgoing {
     public void sendBidAnswer(boolean answer) {
         try {
             out.writeByte(5);
-            out.flush();
             out.writeBoolean(answer);
             out.flush();
         } catch(IOException e) {
@@ -47,7 +46,6 @@ public class ClientOutgoing {
     public void sendPriceStage(byte priceStage) {
         try {
             out.writeByte(4);
-            out.flush();
             out.writeByte(priceStage);
             out.flush();
         } catch(IOException e) {
@@ -58,7 +56,6 @@ public class ClientOutgoing {
     public void sendGameId(byte gameId) {
         try {
             out.writeByte(3);
-            out.flush();
             out.writeByte(gameId);
             out.flush();
         } catch(IOException e) {
@@ -69,7 +66,6 @@ public class ClientOutgoing {
     public void sendSkat(Card[] skat) {
         try {
             out.writeByte(2);
-            out.flush();
             out.writeObject(skat);
             out.flush();
         } catch(IOException e) {
@@ -80,7 +76,6 @@ public class ClientOutgoing {
     public void playCard(Card card) {
         try {
             out.writeByte(1);
-            out.flush();
             out.writeObject(card);
             out.flush();
         } catch(IOException e) {

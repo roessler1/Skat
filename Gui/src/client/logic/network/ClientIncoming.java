@@ -128,14 +128,11 @@ public class ClientIncoming {
 
     private void updatePlayerPoints() {
         try {
-            short[] points = new short[3];
-            for(byte i = 0; i < points.length; i++) {
-                points[i] = in.readShort();
-            }
+            short[] points = (short[]) in.readObject();
             LogicEvents.getInstance().setPlayerPoints(points);
             cardLogic.clearHand();
             GuiController.getInstance().loadResults();
-        } catch(IOException e) {
+        } catch(IOException | ClassNotFoundException e) {
             Log.getLogger().log(Level.SEVERE, e.getMessage(), e);
         }
     }
@@ -168,13 +165,7 @@ public class ClientIncoming {
 
     private void updateHand() {
         try {
-            ArrayList<Card> hand = new ArrayList<>();
-            byte max = in.readByte();
-            byte i = 0;
-            while(i < max) {
-                hand.add((Card) in.readObject());
-                i++;
-            }
+            ArrayList<Card> hand = (ArrayList<Card>) in.readObject();
             cardLogic.addCardsToHand(hand);
             Platform.runLater(() ->LogicEvents.getInstance().getInformation().emptyInformation());
         } catch(IOException | ClassNotFoundException e) {
