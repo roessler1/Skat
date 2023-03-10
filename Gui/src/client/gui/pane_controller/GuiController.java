@@ -7,6 +7,7 @@ import client.gui.panes.PlayedCardPane;
 import client.gui.panes.ServerSelectionPane;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Screen;
 import skat.log.Log;
 
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class GuiController {
     private GuiController(Gui gui) {
         guiController = this;
         this.gui = gui;
-        cardWidth = gui.getBorderPane().getWidth()*0.6/13*2;
+        cardWidth = Screen.getPrimary().getBounds().getWidth()*0.6/13*2;
         cardHeight = cardWidth*(294.0/190.0);
     }
 
