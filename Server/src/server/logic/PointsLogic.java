@@ -3,6 +3,7 @@ package server.logic;
 import skat.cards.Card;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PointsLogic {
 
@@ -154,5 +155,21 @@ public class PointsLogic {
 
     protected byte getPriceStage() {
         return priceStage;
+    }
+
+    public void setPeaks(ArrayList<Card> hand, Card[] skat) {
+        Iterator<Card> iterator = hand.iterator();
+        while(iterator.hasNext()) {
+            Card card = iterator.next();
+            if(card.getValue() != 2 && card.getValue() != gameId) {
+                continue;
+            }
+            addPeak(card);
+        }
+        for(Card card:skat) {
+            if(card.getValue() == 2 || card.getValue() == gameId) {
+                addPeak(card);
+            }
+        }
     }
 }

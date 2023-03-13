@@ -12,7 +12,7 @@ public class CardPartLogic {
     private final ArrayList<Card> cards;
     private final ArrayList<Card>[] hands;
     private final Card[] playedCards;
-    private final Card[] skat;
+    private Card[] skat;
     private final Random random;
     private byte gameId;
     private byte singlePlayer;
@@ -104,6 +104,7 @@ public class CardPartLogic {
             hands[playerId].remove(skat[0]);
             hands[playerId].remove(skat[1]);
         }
+        this.skat = skat;
         CardSort sort = new CardSort();
         hands[playerId] = sort.sort(hands[playerId], gameId);
         cards.addAll(Arrays.asList(skat));

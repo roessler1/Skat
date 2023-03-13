@@ -29,8 +29,6 @@ public class ServerLogic {
             server.getClient((byte) 0).sendPlayedCards(cardLogic.getPlayedCards());
             server.getClient((byte) 1).sendPlayedCards(cardLogic.getPlayedCards());
             server.getClient((byte) 2).sendPlayedCards(cardLogic.getPlayedCards());
-            if((card.getColor() == pointsLogic.getGameId() || card.getValue() == 2) && playerId == singlePlayer)
-                pointsLogic.addPeak(card);
             if(cardLogic.isPlayedCardsFull()) {
                 calculatePoints();
                 cardLogic.emptyPlayedCards();
@@ -101,7 +99,6 @@ public class ServerLogic {
         pointsLogic.addSinglePoints(skat[0].getValue());
         pointsLogic.addSinglePoints(skat[1].getValue());
         cardLogic.setSkat(skat, singlePlayer);
-
     }
 
     public void setGameId(byte gameId) {
@@ -110,6 +107,7 @@ public class ServerLogic {
         server.getClient((byte) 0).sendGame(gameId);
         server.getClient((byte) 1).sendGame(gameId);
         server.getClient((byte) 2).sendGame(gameId);
+        pointsLogic.setPeaks(cardLogic.getHand(singlePlayer), cardLogic.getSkat());
     }
 
     public void setPriceStage(byte priceStage) {
