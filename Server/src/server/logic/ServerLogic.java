@@ -87,8 +87,7 @@ public class ServerLogic {
             }
             pointsLogic.addSinglePoints(points);
         } else {
-            if(pointsLogic.getPriceStage() > 3) {
-                pointsLogic.giveUp(singlePlayer);
+            if(pointsLogic.getPriceStage() > 3 && pointsLogic.getGameId() != 46 && pointsLogic.getGameId() != 59) {
                 finishRound();
             }
             pointsLogic.addDoublePoints(points);
