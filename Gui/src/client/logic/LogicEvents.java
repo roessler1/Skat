@@ -106,6 +106,8 @@ public class LogicEvents {
     public void buildConnection(String address) {
         try {
             socket.connect(new InetSocketAddress(address, 18081));
+            socket.setTcpNoDelay(true);
+            socket.setSoTimeout(5000);
             outgoing = new ClientOutgoing(socket.getOutputStream());
             incoming = new ClientIncoming(socket.getInputStream(), cardLogic);
         } catch(IOException e) {
